@@ -26,6 +26,7 @@ Every sketch change and every narrative statement must follow this spatial logic
 - Fields separated by **comma** `,`
 - No XML tags, no quotes, no units (`px`, `m`)
 - Colors: hex **without** `#`
+- **IDs: no spaces** — use `_` (e.g. `My_Troop`, not `My Troop`). Inline LLSketch is passed in URLs as `?data=…`; spaces break encoding and transfer.
 - Coordinate system: **X** to the right, **Y** downward (screen/SVG convention)
 
 ### Field structure (6 columns)
@@ -37,7 +38,7 @@ Type, ID, X, Y, Dimensions, Color
 | Field | Description |
 |-------|-------------|
 | Type | One letter: `r`, `c`, `e`, `p`, `t` |
-| ID | Unique name or (for `t`) the text content |
+| ID | Unique name or (for `t`) the text content — **no spaces**; use `_` instead (URL-safe) |
 | X | X position (center for `c`/`e`, corner for `r`, start for `p`) |
 | Y | Y position |
 | Dimensions | Type-dependent — see below |
@@ -112,7 +113,9 @@ Examples:
 
 ---
 
-## 4. URL-safe delimiters
+## 4. URL-safe delimiters & IDs
+
+Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `map.php?data=r,Orc-Fortress,…` or `<llsketch>…</llsketch>` in APIs. Every character must survive URL encoding without ambiguity.
 
 | Purpose | Character | Do not use |
 |---------|-----------|------------|
@@ -120,6 +123,9 @@ Examples:
 | Width/height, radii, rotation angle | `:` | `\|` (URL issues) |
 | Connect path points | `_` | `;` (URL-reserved) |
 | Objects on one line | `!` | Line break in URLs |
+| **Word separator in IDs** | **`_`** | **Space** (breaks URLs and CSV parsing) |
+
+**ID rule:** Never use spaces in the ID field (including text labels for type `t`). Replace spaces with underscore: `Orc_Army`, `Final_Combat_Zone`, `My_Troop`. Hyphens (`My-Troop`) are also valid.
 
 ---
 
@@ -136,11 +142,13 @@ c,Mountain,850,200,150,6c757d
 </llsketch>
 ```
 
-**Inline (single line):** all objects chained with `!`, **still readable plain text**:
+**Inline (single line):** all objects chained with `!`, **still readable plain text** — suitable for `?data=…` URL parameters:
 
 ```xml
 <llsketch>r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d</llsketch>
 ```
+
+Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d`
 
 The AI **may and should** output inline LLSketch when asked. This is **not** `<rllsketch>`.
 

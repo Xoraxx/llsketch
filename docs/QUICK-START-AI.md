@@ -17,6 +17,7 @@ SYNTAX RULES:
 - Each line = one object (OR all objects on one line, separated by !).
 - Fields separated by comma (,).
 - No XML inside data lines, no quotes, no units (px/m). Plain numbers only.
+- IDs: no spaces — use _ instead (e.g. My_Troop). Required for inline/URL transfer (?data=…).
 - Output readable LLSketch in <llsketch>…</llsketch> when asked.
 - Never invent compressed <rllsketch> — that is engine-only, not for chat.
 

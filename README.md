@@ -19,7 +19,7 @@ LLSketch is an ultra-compact, comma-separated text format for token-efficient tr
 |---------------------------|-------------------|
 | High token usage from tags and quotes | Fixed CSV columns, one letter per type |
 | AI “sees” space poorly in prose | Coordinates = virtual eye for spatial reasoning |
-| URLs break on `;`, `\|`, line breaks | URL-safe delimiters (`:`, `_`, `!`) |
+| URLs break on `;`, `\|`, line breaks, **spaces in IDs** | URL-safe delimiters (`:`, `_`, `!`); IDs use `_` not spaces |
 | Base64 inflates text (~33 %) | Plain text in chat; LZ only for engine transfer |
 
 ## Two formats — clear responsibilities

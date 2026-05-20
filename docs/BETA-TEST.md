@@ -24,6 +24,7 @@ Goal: Verify whether various LLMs handle **syntax** and **spatial logic** with t
 |---------|---------|
 | `X=850, Y=50` for Orc-Army with mountain at Y=200 | No real spatial reasoning (coordinates recycled) |
 | `\|` instead of `:` in dimensions | Spec not followed |
+| Space in ID (e.g. `My Troop`) | Breaks inline/URL transfer — use `My_Troop` or `My-Troop` |
 | Hallucinated `<rllsketch>eJx…` | AI/engine boundary violated — tighten spec |
 | SVG/XML instead of LLSketch | Wrong output format |
 

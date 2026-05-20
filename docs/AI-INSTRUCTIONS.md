@@ -26,6 +26,7 @@ SYNTAX:
 - One object per line OR all objects on one line separated by !
 - Fields: Type,ID,X,Y,Dimensions,Color
 - No XML tags inside data lines, no quotes, no units
+- IDs: no spaces — use _ instead (URL-safe inline transfer, e.g. ?data=…)
 - Colors: hex without #
 
 TYPES (column “Dimensions”):
