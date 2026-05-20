@@ -10,8 +10,14 @@ LLSketch is an ultra-compact, comma-separated text format for token-efficient tr
 
 | Prompt | When to use |
 |--------|-------------|
-| **[QUICK-START-AI.md](docs/QUICK-START-AI.md)** | Minimal block (~30 lines) — paste and go |
+| **[QUICK-START-AI.md](docs/QUICK-START-AI.md)** | **One-liner** for untrained AIs, or ~30-line block |
 | **[AI-INSTRUCTIONS.md](docs/AI-INSTRUCTIONS.md)** | Full version with spatial-reasoning directive & test tasks |
+
+**Ultra-compact (copy + sketch):**
+
+```text
+[(Spatial Reasoning) LLSketch:Type,ID,X,Y,Dim,Hex|r=W:H[:A],c=Rad,e=RX:RY[:A],p=x:y_x:y,t=Size[:A]|ID=no_space(use_)|! inline|A=deg CW]
+```
 
 ## Why LLSketch?
 

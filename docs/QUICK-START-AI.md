@@ -1,10 +1,46 @@
 # LLSketch – Quick start for any AI chat
 
-**Copy the block below** into ChatGPT, Gemini, Claude, or any other chat — as the first message or as custom instructions. No code, no setup.
+**No code, no setup.** Works with ChatGPT, Gemini, Claude, and untrained models.
 
-For spatial-reasoning rules, calibration examples, and beta tests, see [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md).
+For spatial-reasoning tests and calibration, see [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md).
 
 ---
+
+## Ultra-compact (one line)
+
+Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` block:
+
+```text
+[(Spatial Reasoning) LLSketch:Type,ID,X,Y,Dim,Hex|r=W:H[:A],c=Rad,e=RX:RY[:A],p=x:y_x:y,t=Size[:A]|ID=no_space(use_)|! inline|A=deg CW]
+```
+
+| Token | Meaning |
+|-------|---------|
+| `W:H[:A]` | Rectangle width:height, optional angle |
+| `RX:RY[:A]` | Ellipse radii, optional angle |
+| `Size[:A]` | Text font size, optional angle (`ID` = label text) |
+| `A` | Degrees clockwise (SVG). Omit = 0° |
+| `!` | Separates objects on one line (URL / inline transfer) |
+| `use_` | No spaces in IDs — `My_Troop` not `My Troop` |
+
+**Example** — send the line above, then:
+
+```text
+<llsketch>
+r,Orc-Fortress,1200,50,150:100,ffc107
+c,Mountain,850,200,150,6c757d
+r,My-Troop,180,480,150:120,198754
+p,Path,180,480,500:480_850:350,0dcaf0
+</llsketch>
+```
+
+Rotation example (v1.1): `r,Battering-Ram,230,230,180:20:10,6c757d` — see [mechanics.llsketch](../examples/mechanics.llsketch).
+
+---
+
+## Extended prompt (~30 lines)
+
+Use when the one-liner is not enough (explicit `<rllsketch>` ban, coordinate compass, etc.):
 
 ```text
 PROGRAM SPECIFICATION: LLSketch v1.1
@@ -42,19 +78,4 @@ Use X/Y as your virtual eye — infer distances, directions, and layout logicall
 not just store numbers.
 ```
 
----
-
-## Then paste a sketch (optional)
-
-Example to send right after the block above:
-
-```text
-<llsketch>
-r,Orc-Fortress,1200,50,150:100,ffc107
-c,Mountain,850,200,150,6c757d
-r,My-Troop,180,480,150:120,198754
-p,Path,180,480,500:480_850:350,0dcaf0
-</llsketch>
-```
-
-The AI should now read, extend, and return LLSketch — without SVG, JSON, or `<rllsketch>`.
+The AI should read, extend, and return LLSketch — without SVG, JSON, or `<rllsketch>`.
