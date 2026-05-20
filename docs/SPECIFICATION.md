@@ -123,9 +123,12 @@ Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `ma
 | Width/height, radii, rotation angle | `:` | `\|` (URL issues) |
 | Connect path points | `_` | `;` (URL-reserved) |
 | Objects on one line | `!` | Line break in URLs |
+| **End of each object** | **`!`** (recommended) | Relying on newline alone (breaks when copy drops line breaks) |
 | **Word separator in IDs** | **`_`** | **Space** (breaks URLs and CSV parsing) |
 
 **ID rule:** Never use spaces in the ID field (including text labels for type `t`). Replace spaces with underscore: `Orc_Army`, `Final_Combat_Zone`, `My_Troop`. Hyphens (`My-Troop`) are also valid.
+
+**Copy-safe rule (recommended):** Terminate **every** object with `!` — also in multi-line `<llsketch>` blocks. The parser treats `!` and newline as equivalent separators; a trailing `!` on the last object is optional. If copy/paste collapses lines into one row, the sketch still parses. Extra cost: one character per object (negligible).
 
 ---
 
@@ -133,13 +136,19 @@ Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `ma
 
 ### 5.1 `<llsketch>` – plain text (AI interface)
 
-**Standard in chat:** multi-line, one object per line, optionally in tags:
+**Standard in chat:** multi-line, one object per line, optionally in tags. **Recommended:** end each line with `!` (copy-safe):
 
 ```xml
 <llsketch>
-r,Orc-Fortress,1200,50,150:100,ffc107
-c,Mountain,850,200,150,6c757d
+r,Orc-Fortress,1200,50,150:100,ffc107!
+c,Mountain,850,200,150,6c757d!
 </llsketch>
+```
+
+If line breaks are lost on copy, this still works as one row:
+
+```xml
+<llsketch> r,Orc-Fortress,1200,50,150:100,ffc107! c,Mountain,850,200,150,6c757d! </llsketch>
 ```
 
 **Inline (single line):** all objects chained with `!`, **still readable plain text** — suitable for `?data=…` URL parameters:

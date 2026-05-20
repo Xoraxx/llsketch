@@ -16,7 +16,7 @@ LLSketch is an ultra-compact, comma-separated text format for token-efficient tr
 **Ultra-compact (copy + sketch):**
 
 ```text
-[(Spatial Reasoning) LLSketch:Type,ID,X,Y,Dim,Hex|r=W:H[:A],c=Rad,e=RX:RY[:A],p=x:y_x:y,t=Size[:A]|ID=no_space(use_)|! inline|A=deg CW]
+[(Spatial Reasoning) LLSketch:Type,ID,X,Y,Dim,Hex|r=W:H[:A],c=Rad,e=RX:RY[:A],p=x:y_x:y,t=Size[:A]|ID=no_space(use_)|! end_each_obj|A=deg CW]
 ```
 
 ## Why LLSketch?
