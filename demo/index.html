@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LLSketch Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 1rem; background: #1a1a1a; color: #eee; }
+    textarea { width: 100%; height: 140px; font-family: monospace; font-size: 12px; background: #111; color: #d4a373; border: 1px solid #444; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    button { margin: 0.25rem 0.25rem 0.25rem 0; padding: 0.5rem 1rem; cursor: pointer; }
+    pre { background: #111; padding: 0.5rem; overflow: auto; font-size: 11px; max-height: 120px; }
+    iframe { width: 100%; height: 320px; border: 1px solid #444; background: #fff; }
+    .tagline { color: #9aa7b5; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>LLSketch → SVG / RLLSketch</h1>
+  <p class="tagline"><strong>Large Language Sketch</strong> — The Spatial Language for AI</p>
+  <p>Reference demo. <code>&lt;rllsketch&gt;</code> is produced here via LZ only — not by the AI.
+    Load via a local server (<code>npx serve .</code> → <code>/demo/</code>).</p>
+  <textarea id="input"></textarea>
+  <div>
+    <button type="button" id="btn-svg">→ Show SVG</button>
+    <button type="button" id="btn-inline">→ Inline (!)</button>
+    <button type="button" id="btn-rllsketch">→ RLLSketch (LZ)</button>
+  </div>
+  <div class="row">
+    <div>
+      <h3>Inline / RLLSketch</h3>
+      <pre id="out-meta"></pre>
+    </div>
+    <div>
+      <h3>Preview</h3>
+      <iframe id="preview" title="SVG preview"></iframe>
+    </div>
+  </div>
+
+  <script type="module">
+    import {
+      llsketchParse, llsketchToInline, llsketchToSvg,
+      llsketchCompressToRllsketch
+    } from '../lib/llsketch.js';
+
+    const sample = `<llsketch>
+r,Orc-Fortress,1200,50,150:100,ffc107
+c,Mountain,850,200,150,6c757d
+r,My-Troop,180,480,150:120,198754
+p,Path,180,480,500:480_850:350,0dcaf0
+</llsketch>`;
+
+    const input = document.getElementById('input');
+    const outMeta = document.getElementById('out-meta');
+    const preview = document.getElementById('preview');
+    input.value = sample;
+
+    document.getElementById('btn-svg').onclick = () => {
+      const svg = llsketchToSvg(input.value);
+      preview.srcdoc = svg;
+      outMeta.textContent = llsketchParse(input.value).length + ' objects';
+    };
+
+    document.getElementById('btn-inline').onclick = () => {
+      outMeta.textContent = llsketchToInline(input.value);
+    };
+
+    document.getElementById('btn-rllsketch').onclick = () => {
+      const inline = llsketchToInline(input.value);
+      const compressed = llsketchCompressToRllsketch(inline);
+      outMeta.textContent =
+        '<rllsketch>' + compressed + '</rllsketch>\n\ninline: ' +
+        inline.length + ' chars → rllsketch: ' + compressed.length;
+    };
+
+    document.getElementById('btn-svg').click();
+  </script>
+</body>
+</html>

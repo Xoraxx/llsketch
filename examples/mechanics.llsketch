@@ -1,0 +1,7 @@
+# Mechanics blueprint demo (v1.1 rotation) — ram 10°, drive gear 22°
+r,Chassis,80,300,420:20,343a40
+r,Gate-Post,420,160,18:160,dee2e6
+r,Battering-Ram,230,230,180:20:10,6c757d
+c,Axle,300,260,10,212529
+e,Drive-Gear,300,260,52:44:22,adb5bd
+r,Crank-Arm,300,260,58:9:22,868e96
