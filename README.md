@@ -75,17 +75,16 @@ Typical path with [Viewer](https://ai-storycrafter.com/llsketch-viewer.php) and 
 3. **LLM chat** — from **viewer or editor**, copy the sketch as **`<llsketch>`** and paste into any AI chat (optionally with the [format legend](docs/QUICK-START-AI.md#format-legend-for-untrained-llms) for untrained models).
 4. **Round-trip** — paste **`<llsketch>` from chat** into the **editor** to visualize, correct, and copy/send again.
 
-```mermaid
-flowchart TB
-  subgraph share [Share via URL]
-    IL[Inline ?data=] --> V[Viewer]
-    RS[RLLSketch ?data=] --> V
-  end
-  E[Editor] -->|Copy Link| RS
-  V -->|Edit| E
-  V -->|Copy LLSketch| LLM[LLM Chat]
-  E -->|Copy LLSketch| LLM
-  LLM -->|Paste LLSketch| E
+```text
+Share (URL):
+  Editor ──Copy Link (RLLSketch)──► viewer.php?data=… ──► Viewer
+  Viewer ──Edit (RLLSketch URL)──► Editor
+
+LLM loop:
+  Viewer ──Copy LLSketch──┐
+                          ├──► LLM Chat ──Paste LLSketch──► Editor
+  Editor ──Copy LLSketch──┘         ▲                           │
+                                    └──── Copy LLSketch ────────┘
 ```
 
 **Roles:** RLLSketch = compact links & tool handoff. `<llsketch>` = paste into LLM chat (from viewer or editor). Inline = readable `?data=` (works everywhere, longer URLs).
