@@ -1,6 +1,6 @@
 # LLSketch Beta Test – Protocol
 
-Verify whether an LLM handles **syntax**, **spatial logic**, and **v1.1 conventions** (rotation, copy-safe `!`, URL-safe IDs).
+Verify whether an LLM handles **syntax**, **spatial logic**, and **v1.2 conventions** (rotation, `f` vs `p`, copy-safe `!`, URL-safe IDs).
 
 No code required — only chat prompts and sketches.
 
@@ -18,7 +18,7 @@ Run **Track A** first. Use **Track B** for the full matrix below.
 **One-liner** (paste before any sketch):
 
 ```text
-[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
 ```
 
 **Minimal cold start** (single object — untrained models):
@@ -189,4 +189,5 @@ Found a pass or fail? [Open a GitHub Issue](https://github.com/Xoraxx/llsketch/i
 
 - [QUICK-START-AI.md](QUICK-START-AI.md) — minimal one-liner for any chat  
 - [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md) — full prompt + calibration  
-- [SPECIFICATION.md](SPECIFICATION.md) — normative syntax (v1.1)
+- [SPECIFICATION.md](SPECIFICATION.md) — normative syntax (v1.2)  
+- [WEB-EDITOR.md](WEB-EDITOR.md) — Canvas/SVG integration for `f` vs `p`
