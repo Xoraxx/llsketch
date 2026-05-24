@@ -26,6 +26,7 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 | Resource | Link |
 |----------|------|
 | **Web editor (WYSIWYG)** | [ai-storycrafter.com/llsketch-editor.php](https://ai-storycrafter.com/llsketch-editor.php) — draw, export prompt-ready LLSketch ([integration guide](docs/WEB-EDITOR.md)) |
+| **Map viewer (share link)** | [llsketch-viewer.php?data=…](https://ai-storycrafter.com/llsketch-viewer.php?data=E4Gg8sDGC0BiD2wAuwCmBndICMAmADPiAKxHakBc2hIAZrZNQOwCEkIAsvAK4B2SAQwCWvEAA5SIAmUkA2SE2JMAJi1AcAntAAqwePAAOOMUQAsJnJTxkAnGMWmWRgAoCkAC2NmLpfBXP4APoSfgDMkvjKkAK0%2BEA) — short URL via RLLSketch (LZ in `?data=`) |
 | **60-second video (PoC)** | [YouTube](https://www.youtube.com/watch?v=LsJxSLlCcOY) |
 | **Local demo (this repo)** | [demo/index.html](demo/index.html) — parse, SVG preview, LZ (see below) |
 
@@ -59,11 +60,33 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 |------|------------------|---------|
 | **`<llsketch>` (chat)** | **AI & human** | Normal chat I/O — tagged, multi-line, readable |
 | **Inline** | **AI, human, export** | Raw `!`-separated string for `?data=…` — **no tags, no format legend** |
-| **RLLSketch** | **Engine only** (JS/PHP) | LZ-compressed inline for editor ↔ viewer, APIs, DB |
+| **RLLSketch** | **Engine only** (JS/PHP) | LZ-compressed inline — **short shareable map URLs** (`?data=…`), editor ↔ viewer |
 
 Untrained LLMs: [format legend](docs/QUICK-START-AI.md#format-legend-for-untrained-llms) **plus** a `<llsketch>` block — the legend is prompt context, not part of inline/RLLSketch.
 
 ⚠️ **AI must never compute or hallucinate RLLSketch / LZ payloads.**
+
+## Share & LLM workflow
+
+Typical path with [Viewer](https://ai-storycrafter.com/llsketch-viewer.php) and [Editor](https://ai-storycrafter.com/llsketch-editor.php):
+
+1. **Share** — post a short URL (`viewer.php?data=…`). The viewer accepts **inline** or **RLLSketch** in `?data=`; the map renders immediately (forum, chat, email).
+2. **Edit** — from the viewer, open the editor (data passed as RLLSketch in the URL).
+3. **LLM chat** — from **viewer or editor**, copy the sketch as **`<llsketch>`** and paste into any AI chat (optionally with the [format legend](docs/QUICK-START-AI.md#format-legend-for-untrained-llms) for untrained models).
+
+```mermaid
+flowchart TB
+  subgraph share [Share via URL]
+    IL[Inline ?data=] --> V[Viewer]
+    RS[RLLSketch ?data=] --> V
+  end
+  E[Editor] -->|Copy Link| RS
+  V -->|Edit| E
+  V -->|Copy LLSketch| LLM[LLM Chat]
+  E -->|Copy LLSketch| LLM
+```
+
+**Roles:** RLLSketch = compact links & tool handoff. `<llsketch>` = paste into LLM chat (from viewer or editor). Inline = readable `?data=` (works everywhere, longer URLs).
 
 ## Quick start (example sketch)
 

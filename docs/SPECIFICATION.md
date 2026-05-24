@@ -188,13 +188,15 @@ Plain LLSketch appears in two readable shapes — **chat** and **inline**. A thi
 
 | | Chat | Inline | RLLSketch |
 |---|------|--------|-----------|
-| **Typical use** | LLM input/output, human editing | Export to scripts (`?data=…`), APIs | Transfer between systems (editor, viewer, DB) |
+| **Typical use** | LLM input/output, human editing | Export to scripts (`?data=…`), APIs | **Short shareable map URLs**, editor ↔ viewer, DB |
 | **Wrapper** | `<llsketch>…</llsketch>` (usual) | **None** — raw data only | **None** — raw LZ blob only |
 | **Format legend** | Optional (see below) | **Never** | **Never** |
 | **Layout** | Multi-line (one object per line) or one row inside tags | Single line, objects chained with `!` | Opaque compressed string |
 | **Readable?** | Yes | Yes | No (decompress first) |
 
 **Untrained LLMs:** paste the [format legend](QUICK-START-AI.md#format-legend-for-untrained-llms) **above** the `<llsketch>` block — legend teaches grammar; it is **not** part of inline or RLLSketch payloads.
+
+**Typical workflow (viewer / editor / chat):** Share a map as `viewer.php?data=…` (inline or RLLSketch) — recipient sees it instantly. Viewer → editor handoff uses RLLSketch in the URL. **Both viewer and editor** can export **`<llsketch>`** for LLM chat. See [README § Share & LLM workflow](../README.md#share--llm-workflow).
 
 ### 5.1 `<llsketch>` – chat (AI interface)
 
@@ -239,14 +241,18 @@ The AI **may** output inline LLSketch when asked (still readable plain text). Th
 
 - Creation: `LZString.compressToEncodedURIComponent(inlineString)` — compresses the **inline** payload from §5.2
 - Decompression: `LZString.decompressFromEncodedURIComponent(rllsketchPayload)`
-- Use: compact handoff editor ↔ viewer, `map.php?data=…`, APIs, database
+- Use: **short URLs** that open a map directly (`viewer.php?data=…`), compact handoff editor ↔ viewer, APIs, database
 - Content after decompression: identical to inline LLSketch (`!`-separated, no tags)
+
+**Why compress?** Inline works in `?data=…`, but long sketches produce long URLs. RLLSketch shrinks the payload so a link fits in chat, email, or bookmarks — one click to the map.
 
 Example payload (raw LZ string for `?data=…`):
 
 ```text
 E4Gg8sDGC0BiD2wAuwCmBndICMAmADPiAKxHakBc2hIAZrZNQOwCEkIAsvAK4B2SAQwCWvEAA5SIAmUkA2SE2JMAJi1AcAntAAqwePAAOOMUQAsJnJTxkAnGMWmWRgAoCkAC2NmLpfBXP4APoSfgDMkvjKkAK0+EA
 ```
+
+Live example (opens the calibration scene in the [LLSketch Viewer](https://ai-storycrafter.com/llsketch-viewer.php?data=E4Gg8sDGC0BiD2wAuwCmBndICMAmADPiAKxHakBc2hIAZrZNQOwCEkIAsvAK4B2SAQwCWvEAA5SIAmUkA2SE2JMAJi1AcAntAAqwePAAOOMUQAsJnJTxkAnGMWmWRgAoCkAC2NmLpfBXP4APoSfgDMkvjKkAK0%2BEA)):
 
 Optional markup wrapper for storage: `<rllsketch>…</rllsketch>` — tags are **not** part of the compressed payload.
 

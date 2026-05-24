@@ -67,7 +67,7 @@ INLINE (export, ?data=):
   Still readable LLSketch — NOT compressed gibberish.
 
 RLLSKETCH – DO NOT PRODUCE:
-  LZ-compressed inline — produced only by the application (JS/PHP) for editor/viewer handoff.
+  LZ-compressed inline — engine only (JS/PHP). Enables short shareable map URLs (?data=…).
   You must not compute or invent RLLSketch payloads.
 
 COORDINATES: X right, Y down. North = smaller Y, South = larger Y.

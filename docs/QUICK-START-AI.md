@@ -61,7 +61,7 @@ For `?data=…`, APIs, and engines: **inline** — raw string, no `<llsketch>` t
 r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!p,Path,180,480,500:480_850:350,0dcaf0!
 ```
 
-Between systems (editor ↔ viewer), this inline string may be **LZ-compressed** (RLLSketch) — engine only; AIs must not produce it. See [Spec §5](SPECIFICATION.md#5-transfer-formats).
+Between systems (editor ↔ viewer) or for **short map URLs** (`viewer.php?data=…`), the inline string is **LZ-compressed** (RLLSketch) — engine only; AIs must not produce it. See [Spec §5](SPECIFICATION.md#5-transfer-formats). [Live example →](https://ai-storycrafter.com/llsketch-viewer.php?data=E4Gg8sDGC0BiD2wAuwCmBndICMAmADPiAKxHakBc2hIAZrZNQOwCEkIAsvAK4B2SAQwCWvEAA5SIAmUkA2SE2JMAJi1AcAntAAqwePAAOOMUQAsJnJTxkAnGMWmWRgAoCkAC2NmLpfBXP4APoSfgDMkvjKkAK0%2BEA)
 
 ---
 
