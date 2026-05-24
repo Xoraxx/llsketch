@@ -20,7 +20,7 @@ Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` bloc
 | `W:H[:A]` | Rectangle width:height, optional angle |
 | `RX:RY[:A]` | Ellipse radii, optional angle |
 | `Size[:A]` | Text font size, optional angle (`ID` = label text) |
-| `f=x2:y2_x3:y3` | **Closed** polygon — solid area (room, zone); auto-close to start |
+| `f=x2:y2_x3:y3` | **Closed** polygon — solid area; prefer **`r`/`c`** when shape is box/circle (easier for LLM) |
 | `p=x2:y2_x3:y3` | **Open** path — line/polyline only (wall, route); no fill |
 | `A` | Degrees clockwise (SVG). Omit = 0° |
 | `!` | **End every object** with `!` (copy-safe; survives lost line breaks) |
@@ -82,7 +82,7 @@ TYPES & DIMENSIONS (column 5):
   r  Rectangle  → Width:Height[:Angle]     (angle optional, degrees clockwise)
   c  Circle     → Radius
   e  Ellipse    → RX:RY[:Angle]
-  f  Form/Fill  → x2:y2_x3:y3…   (closed polygon, solid interior)
+  f  Form/Fill  → x2:y2_x3:y3…   (closed polygon; prefer r/c for simple rooms — easier LLM containment)
   p  Path       → x2:y2_x3:y3…   (open polyline, stroke only)
   t  Text       → FontSize[:Angle]          (ID column = visible text)
 

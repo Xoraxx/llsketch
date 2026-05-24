@@ -119,12 +119,14 @@ Start point = `(X, Y)`. Additional points in column 5 (`x2:y2_x3:y3…`).
 f,ID,startX,startY,x2:y2_x3:y3_x4:y4,Color
 ```
 
+**AI rule:** `f` = enclosed surface (collision, containment, “inside/outside”). Do not use `p` for filled rooms.
+
+**LLM preference:** `f` works for any closed polygon, but **free-form `f` is harder for models to reason about** than `r` or `c`. Checking whether a point is inside a rectangle or circle is trivial; point-in-polygon for irregular `f` is more error-prone. **Prefer `r` for rectangular rooms and `c` for circular zones**; use `f` only when the footprint is not a box or disk (e.g. L-shaped hall, irregular yard).
+
 Examples:
 
 - `f,Room_A,10,10,110:10_110:80_10:80,e9ecef!` — rectangular room (4 corners + auto-close)
 - `f,Yard,200,200,280:200_260:280_180:260,adb5bd!` — irregular enclosed area
-
-**AI rule:** `f` = enclosed surface (collision, containment, “inside/outside”). Do not use `p` for filled rooms.
 
 ### `p` – Path (open polyline)
 

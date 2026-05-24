@@ -25,7 +25,7 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 
 | Resource | Link |
 |----------|------|
-| **Web editor (WYSIWYG)** | [ai-storycrafter.com/llsketch-editor.php](https://ai-storycrafter.com/llsketch-editor.php) — draw, export prompt-ready LLSketch |
+| **Web editor (WYSIWYG)** | [ai-storycrafter.com/llsketch-editor.php](https://ai-storycrafter.com/llsketch-editor.php) — draw, export prompt-ready LLSketch ([integration guide](docs/WEB-EDITOR.md)) |
 | **60-second video (PoC)** | [YouTube](https://www.youtube.com/watch?v=LsJxSLlCcOY) |
 | **Local demo (this repo)** | [demo/index.html](demo/index.html) — parse, SVG preview, LZ (see below) |
 
@@ -85,6 +85,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 - **[Quick start for AI chat](docs/QUICK-START-AI.md)** — minimal paste block for any chat
 - [AI instructions](docs/AI-INSTRUCTIONS.md) — full prompt + calibration & test tasks
 - [Specification v1.2](docs/SPECIFICATION.md) — syntax, types (`f`/`p`), delimiters, rotation
+- [Web editor integration](docs/WEB-EDITOR.md) — Canvas/SVG snippet for `f` vs `p`
 - [Beta test](docs/BETA-TEST.md) — structured test protocol (quick + full track)
 - [SVG comparison](examples/comparison.md) — token savings example
 
@@ -121,7 +122,7 @@ Paste any `.llsketch` file or edit inline — preview SVG, inline (`!`), or `<rl
 | `r` | Rectangle | `width:height[:angle]` |
 | `c` | Circle | `radius` |
 | `e` | Ellipse | `rx:ry[:angle]` |
-| `f` | Form / closed polygon | `x2:y2_x3:y3_…` (solid fill) |
+| `f` | Form / closed polygon | `x2:y2_x3:y3_…` (solid fill; **prefer `r`/`c` for simple zones**) |
 | `p` | Path / open polyline | `x2:y2_x3:y3_…` (stroke only) |
 | `t` | Text | `fontSize[:angle]` (ID = text content) |
 

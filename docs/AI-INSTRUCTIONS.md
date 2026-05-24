@@ -47,6 +47,7 @@ TYPES (column “Dimensions”):
   t  Text         → FontSize[:Angle]       (ID field = text content)
 
 POLYGON RULE: f closes back to (X,Y) — enclosed area. p stops at last point — line only.
+  Prefer r or c for zones when shape allows — easier LLM containment than irregular f.
   Example: f,Room_A,10,10,110:10_110:80_10:80,e9ecef!
   Example: p,Wall,10,10,20:10,333333!
   Example: p,Barrier,10,10,20:10_20:20_30:20,000000!
