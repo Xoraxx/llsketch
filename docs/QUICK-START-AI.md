@@ -40,7 +40,7 @@ Collapsed to one line after copy — still valid:
 <llsketch> r,Orc-Fortress,1200,50,150:100,ffc107! c,Mountain,850,200,150,6c757d! r,My-Troop,180,480,150:120,198754! p,Path,180,480,500:480_850:350,0dcaf0! </llsketch>
 ```
 
-Rotation example (v1.1): `r,Battering-Ram,230,230,180:20:10,6c757d` — see [mechanics.llsketch](../examples/mechanics.llsketch).
+Rotation example (v1.1): `r,Battering-Ram,230,230,180:20:10,6c757d!` — see [mechanics.llsketch](../examples/mechanics.llsketch).
 
 ---
 
@@ -57,6 +57,7 @@ transmission of spatial data to AIs — maps, floor plans, tactical scenes, blue
 
 SYNTAX RULES:
 - Each line = one object (OR all objects on one line, separated by !).
+- End each object with ! (copy-safe if line breaks are lost on copy/paste).
 - Fields separated by comma (,).
 - No XML inside data lines, no quotes, no units (px/m). Plain numbers only.
 - IDs: no spaces — use _ instead (e.g. My_Troop). Required for inline/URL transfer (?data=…).

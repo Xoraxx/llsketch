@@ -1,0 +1,18 @@
+Dieses Projekt dient als RPG-Chat ziwschen uns.
+
+Ich erkläre dir die einzelnen Dateien.
+
+_vorgeschicte.txt
+Die Geschichte hatte bereits einen grosse Handlung, welche wir hier fortstzen werden. Die Datei _vorgeschichte.txt dinest als Informationsquelle vergangener ereignisse (statisch)
+
+Merek-Hof.svg
+Dies wurde erstelle um den Hauptort der Geschichte für dich nachvollziehpar zu gestalten, damit du innerhalb der Geschichte verstehen kannst, was sich wo befindet. Falls du in der Lage bist, kannst du diese Datei auch bearbeiten, aktualisieren oder neue objekte hinzu fügen.
+
+RPG-Anleitung.html
+Dies ist deine Anweisung, welche du ausführen sollst. sie erklärt dir weitere Vorgehenun dden umgang mit den Logbüchern.
+
+Allgemein zu Logbuch.yaml Dateien
+Diese sollen aktiv genutzt, neues Notiert werden um die Handlung längerfristig korrekt zu halten, erinnerungen an ereignisse zu Bewahlen damit die Geschichte lebhaft und aktuell bleibt.
+
+KI Zusatz:
+Du kannst bei Bedarf auch notizen und Hilfsdateien anlegen. Kennzeichen diese aber gerne mit __ wie zum Beispiel: __NoteDateihandling.yaml

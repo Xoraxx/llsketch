@@ -23,6 +23,7 @@ Every sketch change and every narrative statement must follow this spatial logic
 ## 2. Basic principle
 
 - Each **line** (or each `!` segment) = **one object**
+- **End each object with `!`** (copy-safe; survives lost line breaks on copy/paste)
 - Fields separated by **comma** `,`
 - No XML tags, no quotes, no units (`px`, `m`)
 - Colors: hex **without** `#`
@@ -59,8 +60,8 @@ r,ID,X,Y,Width:Height[:Angle],Color
 
 Examples:
 
-- `r,Workbench,100,50,45:90,ffc107`
-- `r,Battering-Ram,230,230,180:20:10,6c757d` — slight angle for a level strike at the gate (see [mechanics.llsketch](../examples/mechanics.llsketch))
+- `r,Workbench,100,50,45:90,ffc107!`
+- `r,Battering-Ram,230,230,180:20:10,6c757d!` — slight angle for a level strike at the gate (see [mechanics.llsketch](../examples/mechanics.llsketch))
 
 ### `c` – Circle
 
@@ -68,7 +69,7 @@ Examples:
 c,ID,X,Y,Radius,Color
 ```
 
-Example: `c,Campfire,500,500,30,0d6efd`
+Example: `c,Campfire,500,500,30,0d6efd!`
 
 ### `e` – Ellipse
 
@@ -80,8 +81,8 @@ e,ID,X,Y,RX:RY[:Angle],Color
 
 Examples:
 
-- `e,Debris-Field,760,300,110:70,6c757d`
-- `e,Crater,400,300,80:40:30,6c757d` — tilted ellipse
+- `e,Debris-Field,760,300,110:70,6c757d!`
+- `e,Crater,400,300,80:40:30,6c757d!` — tilted ellipse
 
 ### `p` – Path / polygon / freehand
 
@@ -94,7 +95,7 @@ Start point = `(X, Y)`. Additional points in column 5:
 p,ID,startX,startY,x2:y2_x3:y3_x4:y4,Color
 ```
 
-Example: `p,Stream,10,10,25:40_60:85_120:90,0dcaf0`
+Example: `p,Stream,10,10,25:40_60:85_120:90,0dcaf0!`
 
 ### `t` – Text
 
@@ -108,8 +109,8 @@ t,TextContent,X,Y,FontSize[:Angle],Color
 
 Examples:
 
-- `t,Battlefield,500,50,24,ffffff`
-- `t,North,100,200,18:-90,ffffff` — vertical label
+- `t,Battlefield,500,50,24,ffffff!`
+- `t,North,100,200,18:-90,ffffff!` — vertical label
 
 ---
 
@@ -154,10 +155,10 @@ If line breaks are lost on copy, this still works as one row:
 **Inline (single line):** all objects chained with `!`, **still readable plain text** — suitable for `?data=…` URL parameters:
 
 ```xml
-<llsketch>r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d</llsketch>
+<llsketch>r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!</llsketch>
 ```
 
-Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d`
+Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!`
 
 The AI **may and should** output inline LLSketch when asked. This is **not** `<rllsketch>`.
 

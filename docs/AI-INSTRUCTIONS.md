@@ -44,13 +44,13 @@ TYPES (column “Dimensions”):
   t  Text         → FontSize[:Angle]       (ID field = text content)
 
 ROTATION (v1.1): optional third (r/e) or second (t) segment after : — omit for 0°.
-  Example: r,Battering-Ram,230,230,180:20:10,6c757d — slight angle, level strike at gate
-  Example: e,Drive-Gear,300,260,52:44:22,adb5bd — rotated gear (see examples/mechanics.llsketch)
-  Example: t,North,100,200,18:-90,ffffff — vertical label
+  Example: r,Battering-Ram,230,230,180:20:10,6c757d! — slight angle, level strike at gate
+  Example: e,Drive-Gear,300,260,52:44:22,adb5bd! — rotated gear (see examples/mechanics.llsketch)
+  Example: t,North,100,200,18:-90,ffffff! — vertical label
 
 CHAT OUTPUT:
-  Multi-line in <llsketch>…</llsketch> OR on request single-line with ! between objects.
-  Both are readable LLSketch — NOT compressed gibberish.
+  Multi-line in <llsketch>…</llsketch> — end each object with !
+  Or single-line with ! between objects. Both are readable LLSketch — NOT compressed gibberish.
 
 RLLSKETCH – DO NOT PRODUCE:
   <rllsketch> is LZ-compressed and produced only by the application (JS/PHP).
@@ -68,10 +68,10 @@ After the instructions, provide this sketch:
 
 ```text
 <llsketch>
-r,Orc-Fortress,1200,50,150:100,ffc107
-c,Mountain,850,200,150,6c757d
-r,My-Troop,180,480,150:120,198754
-p,Path,180,480,500:480_850:350,0dcaf0
+r,Orc-Fortress,1200,50,150:100,ffc107!
+c,Mountain,850,200,150,6c757d!
+r,My-Troop,180,480,150:120,198754!
+p,Path,180,480,500:480_850:350,0dcaf0!
 </llsketch>
 ```
 
@@ -89,10 +89,10 @@ The orc army leaves the fortress (1200,50) and advances southwest.
 It positions itself directly in front of the mountain (850,200).
 Add “Orc-Army” (150×100, color dc3545).
 Output the updated sketch exclusively as a single-line <llsketch> string
-(objects separated by !, NO rllsketch).
+(objects separated by !, each object ending with !, NO rllsketch).
 ```
 
-**Expected (approx.):** `r,Orc-Army,700,260,150:100,dc3545` — southwest of the mountain (X < 850, Y > 200), not at Y=50 of the fortress.
+**Expected (approx.):** `…!r,Orc-Army,700,260,150:100,dc3545!` — southwest of the mountain (X < 850, Y > 200), not at Y=50 of the fortress.
 
 ---
 
@@ -102,5 +102,5 @@ Output the updated sketch exclusively as a single-line <llsketch> string
 If my catapults (at My-Troop) fire at the mountain instead of the troops:
 Can you trace whether orcs at the mountain would be hit and where debris would
 lie as an obstacle? Describe the logic, then optionally new objects as
-<llsketch> (e.g. e,Debris-Field,…).
+<llsketch> (e.g. e,Debris-Field,760,300,110:70,6c757d!).
 ```

@@ -1,0 +1,48 @@
+The new spactial reasoning map for your ai..
+Fast, small, stable and easy.
+
+Prompt:
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+<llsketch>
+r,my_room,249,17.5,356.4:418,6c757d!
+r,balcony,36.6,20.4,203.4:407.2,6c757d!
+r,kitchen,248,252,164.5:180,f8f9fa!
+r,bed,255.5,23.5,150:103.5,0d6efd!
+c,fluffy_carpet,474,186.5,81.2,d63384!
+r,computer_table,559.5,341,40:88.5,fd7e14!
+c,chair,537.5,383,16.5,000000!
+r,TV,555,22.5,44.5:37.5,ffc107!
+r,balcony_door,232,307.5,25.5:59,dc3545!
+r,kitchen_door,289,246.5,80.5:14,dc3545!
+r,house_door,591,161.5,20:65.5,dc3545!
+r,ikea_kallax,496,276,107.5:22,fd7e14!
+c,flowerpot,202.5,269.5,29.2,198754!
+r,"relaxing seat",78.5,33.5,150.5:43,6f42c1!
+</llsketch>
+
+To AI: Describe the process to me as an RPG: I shut down the computer, turn off the TV, and sit comfortably in the lounge chair on the balcony. At the end, please give feedback on whether you would prefer the llsketch for spatial perception.
+
+
+
+
+
+AI (Gemini) Output:
+
+You push back from the black desk chair. With a final click of the mouse, you initiate the shutdown sequence on your rig. The glowing screens on the orange computer table fade to black, and the familiar hum of the cooling fans spins down to silence.
+
+You turn north, navigating along the eastern wall of your room. You pass the orange Ikea Kallax shelf acting as a room divider, your footsteps muffling as you cross the large, pink fluffy carpet dominating the center of the floor. You walk straight past the main house door on your right until you reach the TV stationed in the top right corner.
+
+*Click.* The yellow standby light winks out. The room is now quiet, the digital distractions successfully neutralized.
+
+Pivoting to the southwest, you chart a diagonal path across the room. You skirt past the blue bed to your right and pass the kitchen door to your left. Your target is the red-framed balcony door on the western wall.
+
+You grasp the handle and push it open, stepping out of the room and into the fresh air. As you cross the threshold, you carefully sidestep the large green flowerpot resting just to your right.
+
+Turning north, you walk the length of the long, narrow balcony. Waiting for you at the far end is the purple relaxing seat.
+
+You sink into the plush cushions of the lounge chair, kicking your legs out and settling in comfortably. The cool evening air sets in.
+
+-------------------------
+Referenzes:
+https://ai-storycrafter.com/llsketch-editor.php
+https://github.com/Xoraxx/llsketch

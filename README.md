@@ -42,17 +42,17 @@ If an AI should deliver compact output: single-line plain text with `!` as objec
 
 ```text
 <llsketch>
-r,Orc-Fortress,1200,50,150:100,ffc107
-c,Mountain,850,200,150,6c757d
-r,My-Troop,180,480,150:120,198754
-p,Path,180,480,500:480_850:350,0dcaf0
+r,Orc-Fortress,1200,50,150:100,ffc107!
+c,Mountain,850,200,150,6c757d!
+r,My-Troop,180,480,150:120,198754!
+p,Path,180,480,500:480_850:350,0dcaf0!
 </llsketch>
 ```
 
 Single-line (inline, e.g. for copy/paste or engine input):
 
 ```text
-r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754
+r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!
 ```
 
 ## Documentation
@@ -97,7 +97,7 @@ Paste any `.llsketch` file or edit inline — preview SVG, inline (`!`), or `<rl
 | `p` | Path / polygon / freehand | `x2:y2_x3:y3_…` |
 | `t` | Text | `fontSize[:angle]` (ID = text content) |
 
-Optional **angle** in degrees (clockwise, SVG convention). Example: `r,Battering-Ram,230,230,180:20:10,6c757d` (see [mechanics.llsketch](examples/mechanics.llsketch))
+Optional **angle** in degrees (clockwise, SVG convention). Example: `r,Battering-Ram,230,230,180:20:10,6c757d!` (see [mechanics.llsketch](examples/mechanics.llsketch))
 
 ## Beta status
 

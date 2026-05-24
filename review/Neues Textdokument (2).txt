@@ -1,0 +1,42 @@
+https://www.all-ai.de/
+
+Title: Stop burning tokens on JSON spatial maps. I built a 150-token format that gives LLMs persistent spatial reasoning.
+
+Body:
+
+If you’ve ever tried to make an LLM understand a physical environment—whether for autonomous agents, RPGs, or worldbuilding—you know the struggle. You feed it a massive, nested JSON or XML map. It eats 2,000+ tokens, and a few prompts later, the AI still hallucinates a door where a solid wall should be, or completely forgets the scale of a room.
+
+JSON is great for APIs, but it’s terrible for an LLM's context window due to massive syntactic bloat.
+
+That’s why I created LLSketch – a strictly semantic, 6-column CSV-style markup language. It acts as a cognitive compression layer for LLM world states.
+
+How it works:
+By stripping away all syntax redundancy, LLSketch forces the model into pure topological encoding. With around 150 tokens, you can map an entire complex environment (rectangles, circles, paths, coordinates).
+
+Because the data is so condensed and mathematically structured, modern LLMs (tested on GPT, Claude, DeepSeek) start using it as a spatial reasoning engine natively. Instead of forcing the LLM to calculate physics, the format’s topology-aware prompting allows the model to consistently infer physical causality out-of-the-box:
+
+Topological Consistency: By defining a Reference_20m object, the AI infers accurate scale. Travel times and distances become logical. No more teleporting characters.
+
+Emergent Acoustic Coherence: It understands proximity to noise sources. (e.g., "The drive-belt at X=100 is loud, so the character 15 meters away won't hear your conversation.")
+
+Implicit Line of Sight (Raycasting): It mathematically infers if a visual vector intersects a bounding box. (e.g., "You can't see the character clearly because the machinery blocks your line of sight.")
+
+Causal Object Relations: It infers kinematics. Overlapping bounding boxes (like a fulcrum, plank, and falling weight) lead the AI to correctly narrate the kinetic chain reaction.
+
+The Token Math (20 Objects):
+
+JSON: ~1,000 tokens (High parsing error rate for generation)
+
+XML: ~1,300 tokens
+
+LLSketch: ~150 tokens (Extremely robust line-by-line parsing)
+
+I just open-sourced the format and built a lightweight, visual WYSIWYG editor (PHP/JS) that exports your drawn map directly into this prompt-ready string. You can test it right now.
+
+The Web Editor (Test it yourself): https://ai-storycrafter.com/llsketch-editor.php
+
+The Repo & Spec: https://github.com/Xoraxx/llsketch
+
+60-Second Video Proof of Concept: [Link to your YouTube Video]
+
+Would love to hear what the community thinks about this approach to spatial scene representation!
