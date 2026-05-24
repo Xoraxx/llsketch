@@ -2,7 +2,7 @@
 
 **No code, no setup.** Works with ChatGPT, Gemini, Claude, and untrained models.
 
-For spatial-reasoning tests and calibration, see [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md).
+For spatial-reasoning tests, see [BETA-TEST.md](BETA-TEST.md).
 
 ---
 

@@ -1,6 +1,8 @@
 # LLSketch – AI instructions (prompt-ready)
 
-**Shorter version?** See [QUICK-START-AI.md](QUICK-START-AI.md) — **one-liner for untrained AIs** or extended block.
+**Shorter version?** See [QUICK-START-AI.md](QUICK-START-AI.md) — **one-liner for untrained AIs**.
+
+**Full beta protocol?** See [BETA-TEST.md](BETA-TEST.md) — test matrix, reference results, community log.
 
 **Ultra-compact one-liner (with rotation v1.1):**
 

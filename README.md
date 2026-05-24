@@ -60,7 +60,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 - **[Quick start for AI chat](docs/QUICK-START-AI.md)** — minimal paste block for any chat
 - [AI instructions](docs/AI-INSTRUCTIONS.md) — full prompt + calibration & test tasks
 - [Specification v1.1](docs/SPECIFICATION.md) — syntax, types, delimiters, rotation
-- [Beta test](docs/BETA-TEST.md) — test course for ChatGPT, Claude, Gemini & co.
+- [Beta test](docs/BETA-TEST.md) — structured test protocol (quick + full track)
 - [SVG comparison](examples/comparison.md) — token savings example
 
 ## Examples
