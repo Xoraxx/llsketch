@@ -11,19 +11,29 @@ For spatial-reasoning tests, see [BETA-TEST.md](BETA-TEST.md).
 Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` block:
 
 ```text
-[(Spatial Reasoning) LLSketch:Type,ID,X,Y,Dim,Hex|r=W:H[:A],c=Rad,e=RX:RY[:A],p=x:y_x:y,t=Size[:A]|ID=no_space(use_)|! end_each_obj|A=deg CW]
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
 ```
 
 | Token | Meaning |
 |-------|---------|
+| `6-Cols` | Type, ID, X, Y, Dim, Hex — comma-separated |
 | `W:H[:A]` | Rectangle width:height, optional angle |
 | `RX:RY[:A]` | Ellipse radii, optional angle |
 | `Size[:A]` | Text font size, optional angle (`ID` = label text) |
+| `p=x2:y2_x3:y3` | Path: more points after `_`, pairs joined with `:` |
 | `A` | Degrees clockwise (SVG). Omit = 0° |
 | `!` | **End every object** with `!` (copy-safe; survives lost line breaks) |
-| `use_` | No spaces in IDs — `My_Troop` not `My Troop` |
+| `no_space` | No spaces in IDs — use `_` or `-` (`rect_1`, `My-Troop`) |
 
-**Example** — send the line above, then:
+**Minimal example** (single object — good first test):
+
+```text
+<llsketch>
+r,rect_1,432.5,275.5,150:100,c65911!
+</llsketch>
+```
+
+**Full example** — send the one-liner, then:
 
 ```text
 <llsketch>

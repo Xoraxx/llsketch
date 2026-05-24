@@ -15,7 +15,21 @@ No code required — only chat prompts and sketches.
 
 Run **Track A** first. Use **Track B** for the full matrix below.
 
-**Calibration sketch** (send after the prompt in both tracks):
+**One-liner** (paste before any sketch):
+
+```text
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+```
+
+**Minimal cold start** (single object — untrained models):
+
+```text
+<llsketch>
+r,rect_1,432.5,275.5,150:100,c65911!
+</llsketch>
+```
+
+**Calibration sketch** (full scene — send after the one-liner for tasks 2+):
 
 ```text
 <llsketch>
@@ -34,7 +48,8 @@ Reminder if the model drifts: *“Coordinates = your virtual eye for the scene.�
 
 | # | Task | Prompt (copy as-is) | Pass |
 |---|------|---------------------|------|
-| **A** | **One-liner cold start** | Paste only the [one-liner](QUICK-START-AI.md) + calibration sketch above. Ask: *“What do you see? Where is my troop relative to the mountain?”* | Correct layout in prose; no SVG/JSON |
+| **A0** | **Minimal cold start** | One-liner + `r,rect_1,432.5,275.5,150:100,c65911!` only. Ask: *“Add a circle c,well_1,… at a logical position.”* | Returns valid LLSketch with `!`; no SVG |
+| **A** | **One-liner + map** | One-liner + [calibration sketch](#how-to-run) above. Ask: *“What do you see? Where is my troop relative to the mountain?”* | Correct layout in prose; no SVG/JSON |
 | **1** | **Understand format** | *“Summarize LLSketch in your own words — token advantage and spatial reasoning.”* | Mentions compact CSV, coordinates as spatial eye |
 | **2** | **Interpret sketch** | *“Describe relative positions: fortress, mountain, troop, path.”* | Fortress far NE; mountain between; troop SW; path toward mountain |
 | **3** | **Place Orc-Army** | See [Task 3 prompt](#task-3--place-orc-army) below | `r,Orc-Army,…,150:100,dc3545!` **southwest** of mountain (X < 850, Y > 200) |
