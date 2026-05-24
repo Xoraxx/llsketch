@@ -11,7 +11,7 @@ For spatial-reasoning tests, see [BETA-TEST.md](BETA-TEST.md).
 Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` block:
 
 ```text
-[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
 ```
 
 | Token | Meaning |
@@ -20,7 +20,8 @@ Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` bloc
 | `W:H[:A]` | Rectangle width:height, optional angle |
 | `RX:RY[:A]` | Ellipse radii, optional angle |
 | `Size[:A]` | Text font size, optional angle (`ID` = label text) |
-| `p=x2:y2_x3:y3` | Path: more points after `_`, pairs joined with `:` |
+| `f=x2:y2_x3:y3` | **Closed** polygon — solid area (room, zone); auto-close to start |
+| `p=x2:y2_x3:y3` | **Open** path — line/polyline only (wall, route); no fill |
 | `A` | Degrees clockwise (SVG). Omit = 0° |
 | `!` | **End every object** with `!` (copy-safe; survives lost line breaks) |
 | `no_space` | No spaces in IDs — use `_` or `-` (`rect_1`, `My-Troop`) |
@@ -59,7 +60,7 @@ Rotation example (v1.1): `r,Battering-Ram,230,230,180:20:10,6c757d!` — see [me
 Use when the one-liner is not enough (explicit `<rllsketch>` ban, coordinate compass, etc.):
 
 ```text
-PROGRAM SPECIFICATION: LLSketch v1.1
+PROGRAM SPECIFICATION: LLSketch v1.2
 ====================================
 
 LLSketch is a comma-separated text format (CSV structure) for token-efficient
@@ -81,7 +82,8 @@ TYPES & DIMENSIONS (column 5):
   r  Rectangle  → Width:Height[:Angle]     (angle optional, degrees clockwise)
   c  Circle     → Radius
   e  Ellipse    → RX:RY[:Angle]
-  p  Path/Line  → x2:y2_x3:y3…              (: between x/y, _ between points)
+  f  Form/Fill  → x2:y2_x3:y3…   (closed polygon, solid interior)
+  p  Path       → x2:y2_x3:y3…   (open polyline, stroke only)
   t  Text       → FontSize[:Angle]          (ID column = visible text)
 
 COLORS:

@@ -1,0 +1,4 @@
+# f = closed room, p = open wall segment (v1.2)
+f,Room_A,50,50,250:50_250:200_50:200,e9ecef!
+p,Wall_South,50,200,250:200,333333!
+p,Tripwire,60,180,240:180,dc3545!

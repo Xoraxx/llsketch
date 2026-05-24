@@ -1,6 +1,6 @@
 <?php
 /**
- * LLSketch v1.1 → SVG reference parser
+ * LLSketch v1.2 → SVG reference parser
  *
  * Accepts: raw inline, <llsketch>…</llsketch>, or LZ <rllsketch> (decompress first)
  */
@@ -46,7 +46,7 @@ function llsketch_color(string $hex): string
     return '#' . $hex;
 }
 
-function llsketch_parse_path_points(string $dims, float $x0, float $y0): string
+function llsketch_parse_path_points(string $dims, float $x0, float $y0, bool $close = false): string
 {
     $pairs = explode('_', $dims);
     $d = sprintf('M %.4F %.4F', $x0, $y0);
@@ -60,6 +60,9 @@ function llsketch_parse_path_points(string $dims, float $x0, float $y0): string
             continue;
         }
         $d .= sprintf(' L %.4F %.4F', (float) $parts[0], (float) $parts[1]);
+    }
+    if ($close) {
+        $d .= ' Z';
     }
     return $d;
 }
@@ -138,8 +141,14 @@ function llsketch_object_to_svg(array $obj): string
                 "<ellipse id=\"%s\" cx=\"%s\" cy=\"%s\" rx=\"%s\" ry=\"%s\" fill=\"%s\"%s />\n",
                 $id, $x, $y, $rx, $ry, $fill, $rot
             );
+        case 'f':
+            $d = llsketch_parse_path_points($dims, $x, $y, true);
+            return sprintf(
+                "<path id=\"%s\" d=\"%s\" fill=\"%s\" />\n",
+                $id, htmlspecialchars($d, ENT_QUOTES | ENT_XML1, 'UTF-8'), $fill
+            );
         case 'p':
-            $d = llsketch_parse_path_points($dims, $x, $y);
+            $d = llsketch_parse_path_points($dims, $x, $y, false);
             return sprintf(
                 "<path id=\"%s\" d=\"%s\" fill=\"none\" stroke=\"%s\" stroke-width=\"2\" />\n",
                 $id, htmlspecialchars($d, ENT_QUOTES | ENT_XML1, 'UTF-8'), $fill

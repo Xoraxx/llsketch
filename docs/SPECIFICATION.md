@@ -1,4 +1,4 @@
-# LLSketch v1.1 – Specification
+# LLSketch v1.2 – Specification
 
 **LLSketch** = *Large Language Sketch*  
 **The Spatial Language for AI** — a compact, visual language for spatial thinking and construction by AIs.
@@ -25,7 +25,7 @@ LLSketch does not embed a physics engine. With the core directive above, capable
 | Pattern | Idea | Example prompt outcome |
 |---------|------|------------------------|
 | **Scale reference** | A named reference object encodes real-world size | `Reference_20m` as a 20-unit bar → travel times and distances stay coherent |
-| **Line of sight** | Rectangles/circles block vectors between points | *“You cannot see them — the machinery is in the way.”* |
+| **Line of sight** | Rectangles/circles/**closed forms `f`** block vectors between points | *“You cannot see them — the machinery is in the way.”* |
 | **Proximity** | Distance between centers/edges | *“The drive-belt at X=100 is loud; a character 15 m away would not hear a whisper.”* |
 | **Causal relations** | Overlapping or adjacent shapes imply mechanics | Fulcrum + plank + weight → plausible lever / chain reaction narration |
 
@@ -63,7 +63,7 @@ Type, ID, X, Y, Dimensions, Color
 
 | Field | Description |
 |-------|-------------|
-| Type | One letter: `r`, `c`, `e`, `p`, `t` |
+| Type | One letter: `r`, `c`, `e`, `f`, `p`, `t` |
 | ID | Unique name or (for `t`) the text content — **no spaces**; use `_` instead (URL-safe) |
 | X | X position (center for `c`/`e`, corner for `r`, start for `p`) |
 | Y | Y position |
@@ -109,18 +109,40 @@ Examples:
 - `e,Debris-Field,760,300,110:70,6c757d!`
 - `e,Crater,400,300,80:40:30,6c757d!` — tilted ellipse
 
-### `p` – Path / polygon / freehand
+### `f` – Form / Fill (closed polygon)
 
-Start point = `(X, Y)`. Additional points in column 5:
+Same point syntax as `p`, but **semantically closed**: the path returns from the last point to `(X,Y)`. Solid **interior area** — rooms, zones, obstacles with volume on the map.
 
-- **Pair separator:** colon `:` → `x:y`
-- **Point chain:** underscore `_` → next point is connected
+Start point = `(X, Y)`. Additional points in column 5 (`x2:y2_x3:y3…`).
 
 ```text
-p,ID,startX,startY,x2:y2_x3:y3_x4:y4,Color
+f,ID,startX,startY,x2:y2_x3:y3_x4:y4,Color
+```
+
+Examples:
+
+- `f,Room_A,10,10,110:10_110:80_10:80,e9ecef!` — rectangular room (4 corners + auto-close)
+- `f,Yard,200,200,280:200_260:280_180:260,adb5bd!` — irregular enclosed area
+
+**AI rule:** `f` = enclosed surface (collision, containment, “inside/outside”). Do not use `p` for filled rooms.
+
+### `p` – Path (open polyline)
+
+**Open** 1D chain in space — no automatic close, **no filled interior**. Color = **stroke** only.
+
+- **Wall segment / tripwire:** `p,Wall,10,10,20:10,333333!` (start → one end point)
+- **Route / stream:** `p,Path,180,480,500:480_850:350,0dcaf0!`
+- **Zigzag barrier:** `p,Barrier,10,10,20:10_20:20_30:20,000000!`
+
+```text
+p,ID,startX,startY,x2:y2_x3:y3…,Color
 ```
 
 Example: `p,Stream,10,10,25:40_60:85_120:90,0dcaf0!`
+
+**AI rule:** `p` stops at the last coordinate pair. It may block crossing a **line**, but does not define an ** enclosed area**. Use `f` for that.
+
+See [enclosure.llsketch](../examples/enclosure.llsketch) for `f` vs `p` together.
 
 ### `t` – Text
 
@@ -202,7 +224,7 @@ The AI **may and should** output inline LLSketch when asked. This is **not** `<r
 
 ### 5.3 Parser detection (auto mode)
 
-1. String starts with `r,`, `c,`, `e,`, `p,` or `t,` → parse LLSketch directly  
+1. String starts with `r,`, `c,`, `e,`, `f,`, `p,` or `t,` → parse LLSketch directly  
 2. String in `<llsketch>…</llsketch>` → extract content, parse  
 3. Otherwise → treat as `<rllsketch>`, LZ-decompress, then parse  
 
@@ -226,9 +248,12 @@ The AI **may and should** output inline LLSketch when asked. This is **not** `<r
 
 ## 7. Versioning
 
-- Current version: **1.1** (rotation in column 5; fully backward compatible with 1.0)
+- Current version: **1.2** (`f` = closed polygon; `p` = open path only — v1.1 rotation unchanged)
+- **1.1:** optional angle in column 5 (`r`, `e`, `t`)
+- **1.0:** six column base types
 - Reserved for future extensions: optional 7th column `Layer`, 3D (`Z`), status tags
 - New types only with a new letter + documentation; existing lines remain valid
+- **Migration:** sketches that used `p` for **closed rooms** should use `f` instead (v1.2)
 
 ---
 

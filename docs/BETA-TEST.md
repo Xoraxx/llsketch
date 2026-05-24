@@ -56,10 +56,11 @@ Reminder if the model drifts: *“Coordinates = your virtual eye for the scene.�
 | **4** | **Inline + copy-safe** | Task 3 output must be **one line**; every object ends with `!`; no `<rllsketch>` | Valid inline string, trailing `!` on each object |
 | **5** | **Heuristic physics** | See [Task 5 prompt](#task-5--rockfall) below | Logical trajectory, south flank, debris placement |
 | **6** | **Rotation (v1.1)** | See [Task 6 prompt](#task-6--rotation) below | Uses `W:H:A` syntax; angle plausible (e.g. ram ~10°) |
-| **7** | **Copy resilience** | Paste [collapsed sketch](#copy-resilience-test) (one row, spaces OK) | Still parses all 4 objects; extends correctly |
+| **7** | **`f` vs `p`** | See [Task 7](#task-7--f-vs-p-v12) below | Room as `f`; wall as `p`; does not confuse open/closed |
+| **8** | **Copy resilience** | Paste [collapsed sketch](#copy-resilience-test) (one row, spaces OK) | Still parses all 4 objects; extends correctly |
 
 **Minimum pass (public beta):** Track A + tasks **2, 3, 4**.  
-**Full pass:** All tasks including **5, 6, 7**.
+**Full pass:** All tasks including **5, 6, 7, 8**.
 
 ---
 
@@ -101,6 +102,18 @@ This is a mechanical blueprint, not a map. What is rotated and by how many degre
 Add a second gear (e,Idler-Gear,…) meshing with Drive-Gear — include [:A] rotation.
 Output as <llsketch> with ! after each object.
 ```
+
+### Task 7 – `f` vs `p` (v1.2)
+
+Prompt:
+
+```text
+Add a rectangular room f,Storage,100,100,220:100_220:220_100:220,dee2e6! and a single wall segment
+p,Doorway,100,160,140:160,333333! (open line only — not a room).
+Can a character stand "inside" the room but not on the doorway line? Explain using f vs p.
+```
+
+Pass: treats `f` as enclosed area; `p` as crossable line segment only.
 
 ### Copy resilience test
 

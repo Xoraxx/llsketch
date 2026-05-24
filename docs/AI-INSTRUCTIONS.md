@@ -4,10 +4,10 @@
 
 **Full beta protocol?** See [BETA-TEST.md](BETA-TEST.md) — test matrix, reference results, community log.
 
-**Ultra-compact one-liner (with rotation v1.1):**
+**Ultra-compact one-liner (v1.2):**
 
 ```text
-[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
 ```
 
 Copy the following block as-is into a system prompt, Custom GPT instructions, or as the first message in a chat.
@@ -15,7 +15,7 @@ Copy the following block as-is into a system prompt, Custom GPT instructions, or
 ---
 
 ```text
-PROGRAM SPECIFICATION: LLSKETCH & RLLSKETCH V1.1
+PROGRAM SPECIFICATION: LLSKETCH & RLLSKETCH V1.2
 ================================================
 
 LLSketch (Large Language Sketch) – The Spatial Language for AI.
@@ -39,11 +39,17 @@ SYNTAX:
 - Colors: hex without #
 
 TYPES (column “Dimensions”):
-  r  Rectangle    → Width:Height[:Angle]   (angle optional, degrees clockwise)
-  c  Circle       → Radius
-  e  Ellipse      → RX:RY[:Angle]
-  p  Path         → x2:y2_x3:y3…   (: between x/y, _ between points)
+  r  Rectangle    → Width:Height[:Angle]   (solid, filled)
+  c  Circle       → Radius                 (solid, filled)
+  e  Ellipse      → RX:RY[:Angle]          (solid, filled)
+  f  Form/Fill    → x2:y2_x3:y3…           (CLOSED polygon — solid interior; use for rooms/zones)
+  p  Path         → x2:y2_x3:y3…           (OPEN polyline — walls, routes; no enclosed area)
   t  Text         → FontSize[:Angle]       (ID field = text content)
+
+POLYGON RULE: f closes back to (X,Y) — enclosed area. p stops at last point — line only.
+  Example: f,Room_A,10,10,110:10_110:80_10:80,e9ecef!
+  Example: p,Wall,10,10,20:10,333333!
+  Example: p,Barrier,10,10,20:10_20:20_30:20,000000!
 
 ROTATION (v1.1): optional third (r/e) or second (t) segment after : — omit for 0°.
   Example: r,Battering-Ram,230,230,180:20:10,6c757d! — slight angle, level strike at gate

@@ -41,7 +41,7 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 **Ultra-compact (copy + sketch):**
 
 ```text
-[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
 ```
 
 ## Why LLSketch?
@@ -84,7 +84,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 
 - **[Quick start for AI chat](docs/QUICK-START-AI.md)** — minimal paste block for any chat
 - [AI instructions](docs/AI-INSTRUCTIONS.md) — full prompt + calibration & test tasks
-- [Specification v1.1](docs/SPECIFICATION.md) — syntax, types, delimiters, rotation
+- [Specification v1.2](docs/SPECIFICATION.md) — syntax, types (`f`/`p`), delimiters, rotation
 - [Beta test](docs/BETA-TEST.md) — structured test protocol (quick + full track)
 - [SVG comparison](examples/comparison.md) — token savings example
 
@@ -95,6 +95,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 | [examples/training.llsketch](examples/training.llsketch) | Minimal starter scene (4 objects, no rotation) |
 | [examples/battlefield.llsketch](examples/battlefield.llsketch) | Full tactical map with labels |
 | [examples/mechanics.llsketch](examples/mechanics.llsketch) | Blueprint / gear demo (v1.1 rotation) |
+| [examples/enclosure.llsketch](examples/enclosure.llsketch) | Closed `f` vs open `p` (v1.2) |
 | [examples/scale-reference.llsketch](examples/scale-reference.llsketch) | Scale convention (`Reference_20m`) |
 
 ## Live demo
@@ -113,14 +114,15 @@ Paste any `.llsketch` file or edit inline — preview SVG, inline (`!`), or `<rl
 - `lib/llsketch-parser.php` — LLSketch → SVG
 - `lib/llsketch.js` — parse, inline (`!`), LZ ↔ `<rllsketch>` (requires [lz-string](https://github.com/pieroxy/lz-string))
 
-## Supported geometry (v1.1)
+## Supported geometry (v1.2)
 
 | Type | Meaning | Dimensions (column 5) |
 |------|---------|------------------------|
 | `r` | Rectangle | `width:height[:angle]` |
 | `c` | Circle | `radius` |
 | `e` | Ellipse | `rx:ry[:angle]` |
-| `p` | Path / polygon / freehand | `x2:y2_x3:y3_…` |
+| `f` | Form / closed polygon | `x2:y2_x3:y3_…` (solid fill) |
+| `p` | Path / open polyline | `x2:y2_x3:y3_…` (stroke only) |
 | `t` | Text | `fontSize[:angle]` (ID = text content) |
 
 Optional **angle** in degrees (clockwise, SVG convention). Example: `r,Battering-Ram,230,230,180:20:10,6c757d!` (see [mechanics.llsketch](examples/mechanics.llsketch))
