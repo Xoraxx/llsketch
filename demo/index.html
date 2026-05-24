@@ -27,7 +27,8 @@
   </div>
   <div class="row">
     <div>
-      <h3>Inline / RLLSketch</h3>
+      <h3>Output</h3>
+      <p class="tagline" id="out-hint">Raw data only — no <code>&lt;llsketch&gt;</code> / <code>&lt;rllsketch&gt;</code> wrappers.</p>
       <pre id="out-meta"></pre>
     </div>
     <div>
@@ -51,25 +52,29 @@ p,Path,180,480,500:480_850:350,0dcaf0!
 
     const input = document.getElementById('input');
     const outMeta = document.getElementById('out-meta');
+    const outHint = document.getElementById('out-hint');
     const preview = document.getElementById('preview');
     input.value = sample;
 
     document.getElementById('btn-svg').onclick = () => {
       const svg = llsketchToSvg(input.value);
       preview.srcdoc = svg;
-      outMeta.textContent = llsketchParse(input.value).length + ' objects';
+      outHint.textContent = llsketchParse(input.value).length + ' objects parsed.';
+      outMeta.textContent = '';
     };
 
     document.getElementById('btn-inline').onclick = () => {
-      outMeta.textContent = llsketchToInline(input.value);
+      const inline = llsketchToInline(input.value);
+      outHint.textContent = 'Inline — copy for ?data=… or chat (plain objects, ! separated).';
+      outMeta.textContent = inline;
     };
 
     document.getElementById('btn-rllsketch').onclick = () => {
       const inline = llsketchToInline(input.value);
       const compressed = llsketchCompressToRllsketch(inline);
-      outMeta.textContent =
-        '<rllsketch>' + compressed + '</rllsketch>\n\ninline: ' +
-        inline.length + ' chars → rllsketch: ' + compressed.length;
+      outHint.textContent =
+        'RLLSketch — LZ payload only (' + compressed.length + ' chars). Wrap in <rllsketch>…</rllsketch> if needed.';
+      outMeta.textContent = compressed;
     };
 
     document.getElementById('btn-svg').click();

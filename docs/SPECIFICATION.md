@@ -209,6 +209,8 @@ If line breaks are lost on copy, this still works as one row:
 
 Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!`
 
+**Engine / URL payload:** use the **raw** inline string above — no `<llsketch>` wrapper, no format legend, no metadata. Same for copy/paste into `?data=…`.
+
 The AI **may and should** output inline LLSketch when asked. This is **not** `<rllsketch>`.
 
 ### 5.2 `<rllsketch>` – LZ-compressed (engine only)
@@ -221,6 +223,8 @@ The AI **may and should** output inline LLSketch when asked. This is **not** `<r
 ```xml
 <rllsketch>eJxNj01rwzAMhv9KeteC5F...</rllsketch>
 ```
+
+**Engine / URL payload:** the **raw LZ string only** (characters between the tags above) — e.g. `map.php?data=eJxNj01…`. XML tags are optional wrappers for storage/markup, not part of the compressed payload.
 
 **AI rule:** Never compute, guess, or invent `<rllsketch>`. When receiving `<rllsketch>`: pass to tool/engine for decompression, then read as `<llsketch>`.
 
