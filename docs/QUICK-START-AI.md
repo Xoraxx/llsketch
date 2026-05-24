@@ -4,11 +4,13 @@
 
 For spatial-reasoning tests, see [BETA-TEST.md](BETA-TEST.md).
 
+**Terminology:** **Format legend** = the `[Format …]` instruction (prompt only). **Chat** = `<llsketch>…</llsketch>`. **Inline** = export string — all objects with `!`, no tags, no legend.
+
 ---
 
-## Ultra-compact (one line)
+## Format legend (for untrained LLMs)
 
-Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` block:
+Tested with untrained AIs — copy **the legend line**, then paste a `<llsketch>` block:
 
 ```text
 [Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
@@ -34,7 +36,7 @@ r,rect_1,432.5,275.5,150:100,c65911!
 </llsketch>
 ```
 
-**Full example** — send the one-liner, then:
+**Full example** — send the format legend, then:
 
 ```text
 <llsketch>
@@ -45,19 +47,27 @@ p,Path,180,480,500:480_850:350,0dcaf0!
 </llsketch>
 ```
 
-Collapsed to one line after copy — still valid:
-
-```text
-<llsketch> r,Orc-Fortress,1200,50,150:100,ffc107! c,Mountain,850,200,150,6c757d! r,My-Troop,180,480,150:120,198754! p,Path,180,480,500:480_850:350,0dcaf0! </llsketch>
-```
+**Untrained LLMs:** send the format legend **and** the block above together (legend teaches grammar — not part of inline or RLLSketch export).
 
 Rotation example (v1.1): `r,Battering-Ram,230,230,180:20:10,6c757d!` — see [mechanics.llsketch](../examples/mechanics.llsketch).
 
 ---
 
+## Inline (export to scripts)
+
+For `?data=…`, APIs, and engines: **inline** — raw string, no `<llsketch>` tags, no format legend, objects chained with `!`:
+
+```text
+r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!p,Path,180,480,500:480_850:350,0dcaf0!
+```
+
+Between systems (editor ↔ viewer), this inline string may be **LZ-compressed** (RLLSketch) — engine only; AIs must not produce it. See [Spec §5](SPECIFICATION.md#5-transfer-formats).
+
+---
+
 ## Extended prompt (~30 lines)
 
-Use when the one-liner is not enough (explicit `<rllsketch>` ban, coordinate compass, etc.):
+Use when the format legend is not enough (explicit RLLSketch ban, coordinate compass, etc.):
 
 ```text
 PROGRAM SPECIFICATION: LLSketch v1.2
@@ -67,7 +77,8 @@ LLSketch is a comma-separated text format (CSV structure) for token-efficient
 transmission of spatial data to AIs — maps, floor plans, tactical scenes, blueprints.
 
 SYNTAX RULES:
-- Each line = one object (OR all objects on one line, separated by !).
+- Chat: one object per line in <llsketch>…</llsketch>
+- Inline export: all objects chained with ! on one line — no tags, no format legend
 - End each object with ! (copy-safe if line breaks are lost on copy/paste).
 - Fields separated by comma (,).
 - No XML inside data lines, no quotes, no units (px/m). Plain numbers only.

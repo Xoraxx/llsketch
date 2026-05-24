@@ -35,10 +35,10 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 
 | Prompt | When to use |
 |--------|-------------|
-| **[QUICK-START-AI.md](docs/QUICK-START-AI.md)** | **One-liner** for untrained AIs, or ~30-line block |
+| **[QUICK-START-AI.md](docs/QUICK-START-AI.md)** | **Format legend** for untrained AIs, or ~30-line block |
 | **[AI-INSTRUCTIONS.md](docs/AI-INSTRUCTIONS.md)** | Full version with spatial-reasoning directive & test tasks |
 
-**Ultra-compact (copy + sketch):**
+**Format legend** (paste before a `<llsketch>` block):
 
 ```text
 [Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
@@ -53,15 +53,17 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 | URLs break on `;`, `\|`, line breaks, **spaces in IDs** | URL-safe delimiters (`:`, `_`, `!`); IDs use `_` not spaces |
 | Base64 inflates text (~33 %) | Plain text in chat; LZ only for engine transfer |
 
-## Two formats — clear responsibilities
+## Formats — chat, inline, RLLSketch
 
-| Format | Who produces it? | Purpose |
-|--------|------------------|---------|
-| **`<llsketch>`** | **AI & human** | Readable in chat, editable, spatially interpretable |
-| **`<rllsketch>`** | **Engine only** (JS/PHP) | LZ-compressed string for URLs (`?data=…`), APIs, DB |
+| Form | Who produces it? | Purpose |
+|------|------------------|---------|
+| **`<llsketch>` (chat)** | **AI & human** | Normal chat I/O — tagged, multi-line, readable |
+| **Inline** | **AI, human, export** | Raw `!`-separated string for `?data=…` — **no tags, no format legend** |
+| **RLLSketch** | **Engine only** (JS/PHP) | LZ-compressed inline for editor ↔ viewer, APIs, DB |
 
-⚠️ **AI must never compute or hallucinate `<rllsketch>` itself.**  
-If an AI should deliver compact output: single-line plain text with `!` as object separator — still readable LLSketch, not LZ gibberish.
+Untrained LLMs: [format legend](docs/QUICK-START-AI.md#format-legend-for-untrained-llms) **plus** a `<llsketch>` block — the legend is prompt context, not part of inline/RLLSketch.
+
+⚠️ **AI must never compute or hallucinate RLLSketch / LZ payloads.**
 
 ## Quick start (example sketch)
 
@@ -74,10 +76,10 @@ p,Path,180,480,500:480_850:350,0dcaf0!
 </llsketch>
 ```
 
-Single-line (inline, e.g. for copy/paste or engine input):
+Inline export (e.g. `?data=…` — no tags, no legend):
 
 ```text
-r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!
+r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!p,Path,180,480,500:480_850:350,0dcaf0!
 ```
 
 ## Documentation

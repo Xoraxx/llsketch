@@ -165,14 +165,14 @@ Examples:
 
 ## 4. URL-safe delimiters & IDs
 
-Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `map.php?data=r,Orc-Fortress,…` or `<llsketch>…</llsketch>` in APIs. Every character must survive URL encoding without ambiguity.
+Inline LLSketch (`!`-separated objects on a single line, no tags) is used for URL transfer — e.g. `map.php?data=r,Orc-Fortress,…`. Every character must survive URL encoding without ambiguity.
 
 | Purpose | Character | Do not use |
 |---------|-----------|------------|
 | Field separator | `,` | – |
 | Width/height, radii, rotation angle | `:` | `\|` (URL issues) |
 | Connect path points | `_` | `;` (URL-reserved) |
-| Objects on one line | `!` | Line break in URLs |
+| Inline object separator | `!` | Line break in URLs |
 | **End of each object** | **`!`** (recommended) | Relying on newline alone (breaks when copy drops line breaks) |
 | **Word separator in IDs** | **`_`** | **Space** (breaks URLs and CSV parsing) |
 
@@ -184,51 +184,75 @@ Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `ma
 
 ## 5. Transfer formats
 
-### 5.1 `<llsketch>` – plain text (AI interface)
+Plain LLSketch appears in two readable shapes — **chat** and **inline**. A third form, **RLLSketch**, is the same inline string after LZ compression (engine only).
 
-**Standard in chat:** multi-line, one object per line, optionally in tags. **Recommended:** end each line with `!` (copy-safe):
+| | Chat | Inline | RLLSketch |
+|---|------|--------|-----------|
+| **Typical use** | LLM input/output, human editing | Export to scripts (`?data=…`), APIs | Transfer between systems (editor, viewer, DB) |
+| **Wrapper** | `<llsketch>…</llsketch>` (usual) | **None** — raw data only | **None** — raw LZ blob only |
+| **Format legend** | Optional (see below) | **Never** | **Never** |
+| **Layout** | Multi-line (one object per line) or one row inside tags | Single line, objects chained with `!` | Opaque compressed string |
+| **Readable?** | Yes | Yes | No (decompress first) |
+
+**Untrained LLMs:** paste the [format legend](QUICK-START-AI.md#format-legend-for-untrained-llms) **above** the `<llsketch>` block — legend teaches grammar; it is **not** part of inline or RLLSketch payloads.
+
+### 5.1 `<llsketch>` – chat (AI interface)
+
+**Standard in chat:** multi-line, one object per line, in tags. **Recommended:** end each line with `!` (copy-safe):
 
 ```xml
 <llsketch>
 r,Orc-Fortress,1200,50,150:100,ffc107!
 c,Mountain,850,200,150,6c757d!
+r,My-Troop,180,480,150:120,198754!
+p,Path,180,480,500:480_850:350,0dcaf0!
 </llsketch>
 ```
 
-If line breaks are lost on copy, this still works as one row:
+**With format legend** (for untrained models — legend + sketch):
 
-```xml
-<llsketch> r,Orc-Fortress,1200,50,150:100,ffc107! c,Mountain,850,200,150,6c757d! </llsketch>
+```text
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+<llsketch>
+r,Orc-Fortress,1200,50,150:100,ffc107!
+c,Mountain,850,200,150,6c757d!
+r,My-Troop,180,480,150:120,198754!
+p,Path,180,480,500:480_850:350,0dcaf0!
+</llsketch>
 ```
 
-**Inline (single line):** all objects chained with `!`, **still readable plain text** — suitable for `?data=…` URL parameters:
+If line breaks are lost on copy, the tagged block still parses as one row.
 
-```xml
-<llsketch>r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!</llsketch>
+### 5.2 Inline – export payload (no wrapper)
+
+**Inline** = all objects chained with `!` on a single line, **without** `<llsketch>` tags and **without** the format legend. Used for `?data=…`, copy/paste into engines, APIs:
+
+```text
+r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,180,480,150:120,198754!p,Path,180,480,500:480_850:350,0dcaf0!
 ```
 
-Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!`
+Example URL: `https://example.com/map?data=r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!…`
 
-**Engine / URL payload:** use the **raw** inline string above — no `<llsketch>` wrapper, no format legend, no metadata. Same for copy/paste into `?data=…`.
+The AI **may** output inline LLSketch when asked (still readable plain text). This is **not** `<rllsketch>`.
 
-The AI **may and should** output inline LLSketch when asked. This is **not** `<rllsketch>`.
+### 5.3 `<rllsketch>` – LZ-compressed inline (engine only)
 
-### 5.2 `<rllsketch>` – LZ-compressed (engine only)
-
-- Creation: `LZString.compressToEncodedURIComponent(llsketchInline)`
+- Creation: `LZString.compressToEncodedURIComponent(inlineString)` — compresses the **inline** payload from §5.2
 - Decompression: `LZString.decompressFromEncodedURIComponent(rllsketchPayload)`
-- Use: `map.php?data=…`, APIs, database
-- Content after decompression: identical to inline LLSketch (`!`-separated)
+- Use: compact handoff editor ↔ viewer, `map.php?data=…`, APIs, database
+- Content after decompression: identical to inline LLSketch (`!`-separated, no tags)
 
-```xml
-<rllsketch>eJxNj01rwzAMhv9KeteC5F...</rllsketch>
+Example payload (raw LZ string for `?data=…`):
+
+```text
+E4Gg8sDGC0BiD2wAuwCmBndICMAmADPiAKxHakBc2hIAZrZNQOwCEkIAsvAK4B2SAQwCWvEAA5SIAmUkA2SE2JMAJi1AcAntAAqwePAAOOMUQAsJnJTxkAnGMWmWRgAoCkAC2NmLpfBXP4APoSfgDMkvjKkAK0+EA
 ```
 
-**Engine / URL payload:** the **raw LZ string only** (characters between the tags above) — e.g. `map.php?data=eJxNj01…`. XML tags are optional wrappers for storage/markup, not part of the compressed payload.
+Optional markup wrapper for storage: `<rllsketch>…</rllsketch>` — tags are **not** part of the compressed payload.
 
-**AI rule:** Never compute, guess, or invent `<rllsketch>`. When receiving `<rllsketch>`: pass to tool/engine for decompression, then read as `<llsketch>`.
+**AI rule:** Never compute, guess, or invent `<rllsketch>`. When receiving `<rllsketch>`: pass to tool/engine for decompression, then read as inline/chat LLSketch.
 
-### 5.3 Parser detection (auto mode)
+### 5.4 Parser detection (auto mode)
 
 1. String starts with `r,`, `c,`, `e,`, `f,`, `p,` or `t,` → parse LLSketch directly  
 2. String in `<llsketch>…</llsketch>` → extract content, parse  

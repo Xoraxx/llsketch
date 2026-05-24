@@ -1,10 +1,10 @@
 # LLSketch – AI instructions (prompt-ready)
 
-**Shorter version?** See [QUICK-START-AI.md](QUICK-START-AI.md) — **one-liner for untrained AIs**.
+**Shorter version?** See [QUICK-START-AI.md](QUICK-START-AI.md) — **format legend for untrained AIs**.
 
 **Full beta protocol?** See [BETA-TEST.md](BETA-TEST.md) — test matrix, reference results, community log.
 
-**Ultra-compact one-liner (v1.2):**
+**Format legend (v1.2):**
 
 ```text
 [Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
@@ -31,7 +31,8 @@ Example: A catapult southwest of a mountain is more likely to hit the south flan
 debris rolls downhill (larger Y) onto units standing there.
 
 SYNTAX:
-- One object per line OR all objects on one line separated by !
+- Chat: one object per line in <llsketch>…</llsketch>
+- Inline export: all objects chained with ! — no tags, no format legend
 - End each object with ! (recommended — copy-safe if line breaks are lost)
 - Fields: Type,ID,X,Y,Dimensions,Color
 - No XML tags inside data lines, no quotes, no units
@@ -57,14 +58,17 @@ ROTATION (v1.1): optional third (r/e) or second (t) segment after : — omit for
   Example: e,Drive-Gear,300,260,52:44:22,adb5bd! — rotated gear (see examples/mechanics.llsketch)
   Example: t,North,100,200,18:-90,ffffff! — vertical label
 
-CHAT OUTPUT:
+CHAT OUTPUT (<llsketch>):
   Multi-line in <llsketch>…</llsketch> — end each object with !
-  Or single-line with ! between objects. Both are readable LLSketch — NOT compressed gibberish.
+  Untrained models: format legend above the block (prompt only — not part of export).
+
+INLINE (export, ?data=):
+  Raw string only — objects chained with !, NO <llsketch> tags, NO format legend.
+  Still readable LLSketch — NOT compressed gibberish.
 
 RLLSKETCH – DO NOT PRODUCE:
-  <rllsketch> is LZ-compressed and produced only by the application (JS/PHP).
-  You must not compute or invent <rllsketch>.
-  If the user wants a “compact single-line sketch”: <llsketch> with ! separators.
+  LZ-compressed inline — produced only by the application (JS/PHP) for editor/viewer handoff.
+  You must not compute or invent RLLSketch payloads.
 
 COORDINATES: X right, Y down. North = smaller Y, South = larger Y.
 ```
@@ -97,8 +101,8 @@ Note to the AI:
 The orc army leaves the fortress (1200,50) and advances southwest.
 It positions itself directly in front of the mountain (850,200).
 Add “Orc-Army” (150×100, color dc3545).
-Output the updated sketch exclusively as a single-line <llsketch> string
-(objects separated by !, each object ending with !, NO rllsketch).
+Output the updated sketch exclusively as an **inline** string
+(objects separated by !, each object ending with !, no <llsketch> tags, no RLLSketch).
 ```
 
 **Expected (approx.):** `…!r,Orc-Army,700,260,150:100,dc3545!` — southwest of the mountain (X < 850, Y > 200), not at Y=50 of the fortress.
