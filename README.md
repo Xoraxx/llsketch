@@ -58,7 +58,9 @@ See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) 
 | Format | Who produces it? | Purpose |
 |--------|------------------|---------|
 | **`<llsketch>`** | **AI & human** | Readable in chat, editable, spatially interpretable |
-| **`<rllsketch>`** | **Engine only** (JS/PHP) | LZ-compressed string for URLs (`?data=…`), APIs, DB |
+| **`<rllsketch>`** | **Engine only** (JS/PHP) | Raw LZ payload for URLs (`?data=…`), APIs, DB — not the format one-liner |
+
+Three layers: **format one-liner** (prompt/script) → **inline** (raw data) → **rllsketch** (raw compressed data). See [Spec §5](docs/SPECIFICATION.md#5-transfer-formats).
 
 ⚠️ **AI must never compute or hallucinate `<rllsketch>` itself.**  
 If an AI should deliver compact output: single-line plain text with `!` as object separator — still readable LLSketch, not LZ gibberish.

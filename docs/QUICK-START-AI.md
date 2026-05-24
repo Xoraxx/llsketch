@@ -8,6 +8,8 @@ For spatial-reasoning tests, see [BETA-TEST.md](BETA-TEST.md).
 
 ## Ultra-compact (one line)
 
+**Prompt / script layer** — for chats and tools that **expect** a format legend. Not part of inline or RLLSketch payloads (see [SPEC §5](SPECIFICATION.md#5-transfer-formats)).
+
 Tested with untrained AIs — copy **this line**, then paste a `<llsketch>` block:
 
 ```text

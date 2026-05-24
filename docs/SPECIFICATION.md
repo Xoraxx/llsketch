@@ -184,6 +184,16 @@ Inline LLSketch (one line, `!`-separated) is used for data transfer — e.g. `ma
 
 ## 5. Transfer formats
 
+Three layers — **do not mix them**:
+
+| Layer | What | Who consumes it | Example |
+|-------|------|-----------------|---------|
+| **Format one-liner** | Spec legend / grammar | Scripts, system prompts, editors that **expect** instructions | `[Format <llsketch> (Spatial Reasoning) \| 6-Cols: …]` — see [QUICK-START-AI.md](QUICK-START-AI.md) |
+| **Inline payload** | Raw objects, `!`-separated | URLs (`?data=…`), APIs, copy/paste into engines | `p,Wall,10,10,20:10,333333!p,Barrier,…` |
+| **RLLSketch payload** | Raw LZ blob | Same as inline, but compressed — **engine only** | `eJxNj01rwzAMhv9K…` |
+
+The format one-liner teaches parsers and LLMs **deliberately** (like a Content-Type header). Inline and RLLSketch are **data only** — no legend, no XML tags, no metadata. Chat may additionally wrap sketches in `<llsketch>…</llsketch>` for readability; engines strip or ignore that wrapper.
+
 ### 5.1 `<llsketch>` – plain text (AI interface)
 
 **Standard in chat:** multi-line, one object per line, optionally in tags. **Recommended:** end each line with `!` (copy-safe):
