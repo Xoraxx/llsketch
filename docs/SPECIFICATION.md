@@ -196,7 +196,7 @@ Plain LLSketch appears in two readable shapes — **chat** and **inline**. A thi
 
 **Untrained LLMs:** paste the [format legend](QUICK-START-AI.md#format-legend-for-untrained-llms) **above** the `<llsketch>` block — legend teaches grammar; it is **not** part of inline or RLLSketch payloads.
 
-**Typical workflow (viewer / editor / chat):** Share a map as `viewer.php?data=…` (inline or RLLSketch) — recipient sees it instantly. Viewer → editor handoff uses RLLSketch in the URL. **Both viewer and editor** can export **`<llsketch>`** for LLM chat. See [README § Share & LLM workflow](../README.md#share--llm-workflow).
+**Typical workflow (viewer / editor / chat):** Share a map as `viewer.php?data=…` (inline or RLLSketch) — recipient sees it instantly. Viewer → editor handoff uses RLLSketch in the URL. **Viewer and editor** export **`<llsketch>`** to LLM chat; paste chat output back into the **editor** to view, fix, and re-send. See [README § Share & LLM workflow](../README.md#share--llm-workflow).
 
 ### 5.1 `<llsketch>` – chat (AI interface)
 
