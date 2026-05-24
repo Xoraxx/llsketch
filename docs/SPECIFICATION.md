@@ -18,6 +18,31 @@ You should use the coordinates to **visualize the scene spatially** — maps, ta
 
 Every sketch change and every narrative statement must follow this spatial logic. Copying coordinates without spatial meaning is not allowed.
 
+### 1.1 Inference patterns (heuristic)
+
+LLSketch does not embed a physics engine. With the core directive above, capable LLMs **consistently infer** plausible consequences from `(X,Y)` geometry — especially when the sketch is compact enough to treat as a whole scene.
+
+| Pattern | Idea | Example prompt outcome |
+|---------|------|------------------------|
+| **Scale reference** | A named reference object encodes real-world size | `Reference_20m` as a 20-unit bar → travel times and distances stay coherent |
+| **Line of sight** | Rectangles/circles block vectors between points | *“You cannot see them — the machinery is in the way.”* |
+| **Proximity** | Distance between centers/edges | *“The drive-belt at X=100 is loud; a character 15 m away would not hear a whisper.”* |
+| **Causal relations** | Overlapping or adjacent shapes imply mechanics | Fulcrum + plank + weight → plausible lever / chain reaction narration |
+
+These are **heuristic**, not guaranteed. Reinforce with the spatial prompt ([QUICK-START-AI.md](QUICK-START-AI.md) or [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md)). Validate critical layouts via [BETA-TEST.md](BETA-TEST.md).
+
+### 1.2 Scale by convention (optional)
+
+No extra schema column is required. Encode scale in the **ID** and dimensions of a reference object:
+
+```text
+r,Reference_20m,0,400,200:10,b0b0b0!
+```
+
+Interpretation: the bar spans **200 coordinate units** and represents **20 meters** → 10 units = 1 m. Place it once per sketch (or per region). All other objects inherit proportional reasoning.
+
+Example file: [scale-reference.llsketch](../examples/scale-reference.llsketch).
+
 ---
 
 ## 2. Basic principle

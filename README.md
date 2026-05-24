@@ -2,7 +2,32 @@
 
 **The Spatial Language for AI** — a compact, visual language that enables AIs to think and construct spatially.
 
-LLSketch is an ultra-compact, comma-separated text format for token-efficient transmission of spatial sketches and scene data to AI systems — and back to renderers (SVG, WebGL, Canvas). Use it for tactical maps, floor plans, or mechanical blueprints.
+LLSketch is an ultra-compact, comma-separated text format for token-efficient transmission of spatial sketches and scene data to AI systems — and back to renderers (SVG, WebGL, Canvas).
+
+## The problem
+
+If you have tried to make an LLM understand a physical environment — for autonomous agents, RPGs, or worldbuilding — you may have fed it a large JSON or XML map. It consumes hundreds or thousands of tokens, and a few prompts later the model still hallucinates a door where a wall should be, or forgets the scale of a room.
+
+JSON is excellent for APIs; for an LLM context window it adds syntactic bloat. LLSketch strips that away: a fixed **6-column** layout that keeps coordinates dense and readable.
+
+## Who is this for?
+
+| Use case | Example |
+|----------|---------|
+| **RPG & worldbuilding** | Tactical maps, troop positions, terrain |
+| **Autonomous agents** | Room layouts, object relations, navigation |
+| **Floor plans & blueprints** | Walls, machinery, rotated components (v1.1) |
+| **Any chat-based AI** | Paste a sketch — no SDK required |
+
+See [Inference patterns](docs/SPECIFICATION.md#11-inference-patterns-heuristic) in the spec for what models can derive from coordinates (scale, line of sight, proximity, causality).
+
+## Try it
+
+| Resource | Link |
+|----------|------|
+| **Web editor (WYSIWYG)** | [ai-storycrafter.com/llsketch-editor.php](https://ai-storycrafter.com/llsketch-editor.php) — draw, export prompt-ready LLSketch |
+| **60-second video (PoC)** | [YouTube](https://www.youtube.com/watch?v=LsJxSLlCcOY) |
+| **Local demo (this repo)** | [demo/index.html](demo/index.html) — parse, SVG preview, LZ (see below) |
 
 ## Use in ChatGPT, Gemini, Claude …
 
@@ -70,6 +95,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 | [examples/training.llsketch](examples/training.llsketch) | Minimal starter scene (4 objects, no rotation) |
 | [examples/battlefield.llsketch](examples/battlefield.llsketch) | Full tactical map with labels |
 | [examples/mechanics.llsketch](examples/mechanics.llsketch) | Blueprint / gear demo (v1.1 rotation) |
+| [examples/scale-reference.llsketch](examples/scale-reference.llsketch) | Scale convention (`Reference_20m`) |
 
 ## Live demo
 
