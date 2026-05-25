@@ -1,6 +1,7 @@
 Restaurant RPG — copy each "Message" block into your LLM chat in order.
 Start map: hard-test-restaurant.llsketch
-Full chat to read (no testing): hard-test-restaurant.html  OR  https://gemini.google.com/share/5f8744929f30
+Read full session: open hard-test-restaurant.html in your browser (Save-as from Gemini also needs hard-test-restaurant_files/ beside it).
+Online: https://gemini.google.com/share/5f8744929f30
 
 ================================================================================
 Step 0 — Train the model

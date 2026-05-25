@@ -123,7 +123,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 |------|---------|
 | `hard-test-restaurant.llsketch` | Start map |
 | `hard-test-restaurant_prompts.txt` | Replay step by step |
-| `hard-test-restaurant.html` | Read the session (+ link to full chat) |
+| `hard-test-restaurant.html` | Full Gemini chat export — **open locally** in a browser |
 
 ## Examples
 
