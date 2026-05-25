@@ -1,3 +1,5 @@
+[Format <llsketch> (Spatial Reasoning) | 6-Cols: Type,ID,X,Y,Dim,Hex | r=W:H[:A],c=Rad,e=RX:RY[:A],f=x2:y2_x3:y3,p=x2:y2_x3:y3,t=Size[:A] | ID=no_space | ! end_each_obj | A=deg CW]
+<llsketch>
 r,rect_1,615.5,346.5,300:200,2f75b5!
 r,referenz_1x1.5m,1070.5,567.5,40:60,000000!
 r,Table_2,833.5,351.5,40:60,c65911!
@@ -15,3 +17,4 @@ r,air-fan,622.5,519.5,26:22,595959!
 r,overtuned_musicbox,890.1,521.1,20.4:24.8,c65911!
 c,tree_with_birds,1117.9,261.5,50,00b050!
 r,main_street,340.5,103.5,187.6:588.8,595959!
+</llsketch>

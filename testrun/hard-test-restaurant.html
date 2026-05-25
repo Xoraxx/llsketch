@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LLSketch test run — Restaurant RPG (Gemini)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #222; }
+    h1 { font-size: 1.4rem; }
+    .meta { background: #f4f4f5; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    .meta a { font-weight: 600; }
+    h2 { font-size: 1.1rem; margin-top: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 0.25rem; }
+    pre { background: #1e1e1e; color: #d4d4d4; padding: 1rem; overflow-x: auto; border-radius: 6px; font-size: 0.85rem; }
+    .user { background: #e8f0fe; padding: 0.75rem 1rem; border-radius: 8px; margin: 0.5rem 0; }
+    .note { color: #555; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>Restaurant RPG — Gemini test run</h1>
+  <div class="meta">
+    <p><strong>Read the full chat</strong> (all model replies and llsketch updates):<br>
+    <a href="https://gemini.google.com/share/5f8744929f30">gemini.google.com/share/5f8744929f30</a></p>
+    <p class="note">Open that link in a browser — it shows the complete conversation with every <code>&lt;llsketch&gt;</code> the model returned. This HTML file is a lightweight companion for the repo; GitHub does not run saved Gemini export pages.</p>
+    <p><strong>Replay:</strong> use <code>hard-test-restaurant.llsketch</code> + <code>hard-test-restaurant_prompts.txt</code> in the same folder.</p>
+  </div>
+
+  <h2>Setup</h2>
+  <p class="user">Upload <code>docs/SPECIFICATION.md</code> and <code>docs/AI-INSTRUCTIONS.md</code>, then:</p>
+  <pre>This is a new way to process the environment.
+Did you understand it and can you apply it in our next exercise (new scene)?</pre>
+
+  <h2>Step 1 — Start scene</h2>
+  <p class="user">Paste <code>hard-test-restaurant.llsketch</code>, then:</p>
+  <pre>We make a small RPG: Guests will be arriving whom we need to serve. Give each guest special attention.
+
+The first two guest steps in and takes a place on a free table. Lisa goes to the table to take the order.
+Give me the actual llsketch as codeblock.</pre>
+  <p class="note">→ Model adds guests, moves Lisa. See share link for full sketch.</p>
+
+  <h2>Step 2 — First order</h2>
+  <pre>Lisa politely asks what they would like, writes it down on a piece of paper, and informs Harald that the order has been received. Just as Harald is about to go to the stove, which is located in the south-facing part of the kitchen, the door opens again. Six guests enter and ask if they can all sit together at the table. Lisa considers for a moment, but then responds without hesitation.</pre>
+
+  <h2>Step 3 — Rush hour</h2>
+  <pre>Lisa takes the order and informs Harald.
+He has just placed the first order on the serving hatch when he receives the order.
+He hurriedly places the chopping board and ingredients on his work surface and heats up a pot.
+As Lisa brings the order of the first two guests to the table, a car alarm blares from outside in the parking lot. One of the guests from the large group rushes outside to his car to stop the alert.</pre>
+
+  <h2>Step 4 — Terrace</h2>
+  <pre>Two more guests arrive, closely followed by a couple. Lisa briefly surveys the tables but then decides to open the terrace, as there are two more tables there.
+
+The new guests also find their seats. Lisa immediately hurries off to take the first order, while Harald sets out the plates for the large group.</pre>
+
+  <h2>Step 5 — Alarm stops</h2>
+  <pre>The alarm finally stopped. Lisa takes the last orders and informs Harald.
+She brings the food for the six people to the table, clears the empty plates of the first guests and takes them towards the kitchen.
+Shortly after, the guests wave to her, hoping that Lisa notices they want to pay.</pre>
+
+  <h2>Step 6 — Lisa's view</h2>
+  <pre>Lisa stands at the serving hatch, waiting for the next meal, and lets her gaze wander around the room as the first guests try to wave her down to pay.</pre>
+
+  <h2>Step 7 — Delivery</h2>
+  <pre>Lisa took the payment, and the first guests said their goodbyes.
+Harald briefly rang the bell, a signal that the next plates were ready. Lisa carried the food to the remaining guests.
+Just as the cook was about to catch his breath, there was a knock on the side kitchen door. A small van was parked there: the meat delivery.
+With a sigh, the cook opened the door to the cold storage room and helped the delivery driver carry the meat inside.</pre>
+
+  <h2>Step 8 — Terrace crack</h2>
+  <pre>Lisa was just heading inside when a loud crack broke the peace. A crack had appeared on the east side of the terrace.
+Although the terrace isn't very high, she asked the affected guests to move inside as a precaution.
+Of course, she helped carry the plates and, as an apology for the inconvenience, served them a glass of wine.</pre>
+  <p class="note">→ Model should add terrace, <code>p,terrace_crack,…</code>, kitchen detail, wine. Compare in web editor.</p>
+
+  <h2>Step 9 — After service</h2>
+  <pre>The meat delivery is long since in the cold storage, the delivery driver has left, and the cook has relaxed with a cigarette in the neighboring park. He sits there calmly on a bench, listening to the birds and the splashing of the fountain, while Lisa inside clears the plates one by one.</pre>
+
+  <h2>Step 10 — Closing</h2>
+  <pre>Once the last plates have been cleared, all the guests have paid and left the restaurant, peace finally returns.
+Lisa and Harald now tidy up together, giving the place a final wipe, knowing that the day has been a complete success.</pre>
+</body>
+</html>
