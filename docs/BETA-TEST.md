@@ -12,9 +12,9 @@ No code required — only chat prompts and sketches.
 |-------|---------------|----------|
 | **A – Quick** | [QUICK-START-AI.md](QUICK-START-AI.md) format legend + example sketch | Untrained models, first contact |
 | **B – Full** | [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md) prompt block + calibration sketch | Spatial-reasoning depth, beta scoring |
-| **C – Restaurant RPG** | [testrun/](../testrun/) — three files: `.llsketch`, `_prompts.txt`, `.html` | Long multi-turn simulation (10 steps) |
+| **C – Restaurant RPG** | [testrun/](../testrun/) — `.llsketch`, `_prompts.md`, `.md` transcript | Long multi-turn simulation (10 steps) |
 
-Run **Track A** first. Use **Track B** for the matrix below. **Track C:** open [testrun/](../testrun/), replay with the prompts file, read the HTML or [Gemini share](https://gemini.google.com/share/5f8744929f30).
+Run **Track A** first. Use **Track B** for the matrix below. **Track C:** [testrun/](../testrun/) — copy prompts from `_prompts.md`, read session in `.md`.
 
 **Format legend** (paste before any sketch):
 
