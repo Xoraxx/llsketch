@@ -123,7 +123,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 |------|---------|
 | `hard-test-restaurant.llsketch` | Start map |
 | `hard-test-restaurant_prompts.md` | Replay step by step (**copy buttons** on GitHub) |
-| `hard-test-restaurant.md` | Full session transcript (user + model sketches) |
+| `hard-test-restaurant.md` | Full chat transcript (User / LLM, incl. narrative) |
 
 ## Examples
 
