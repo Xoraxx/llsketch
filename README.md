@@ -112,7 +112,7 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 - [AI instructions](docs/AI-INSTRUCTIONS.md) — full prompt + calibration & test tasks
 - [Specification v1.2](docs/SPECIFICATION.md) — syntax, types (`f`/`p`), delimiters, rotation
 - [Web editor integration](docs/WEB-EDITOR.md) — Canvas/SVG snippet for `f` vs `p`
-- [Beta test](docs/BETA-TEST.md) — structured test protocol (quick + full track)
+- [Beta test](docs/BETA-TEST.md) — structured test protocol (quick + full track + restaurant RPG)
 - [SVG comparison](examples/comparison.md) — token savings example
 
 ## Examples
@@ -123,6 +123,8 @@ r,Orc-Fortress,1200,50,150:100,ffc107!c,Mountain,850,200,150,6c757d!r,My-Troop,1
 | [examples/battlefield.llsketch](examples/battlefield.llsketch) | Full tactical map with labels |
 | [examples/mechanics.llsketch](examples/mechanics.llsketch) | Blueprint / gear demo (v1.1 rotation) |
 | [examples/enclosure.llsketch](examples/enclosure.llsketch) | Closed `f` vs open `p` (v1.2) |
+| [examples/restaurant-start.llsketch](examples/restaurant-start.llsketch) | Restaurant RPG start (Track C) |
+| [examples/restaurant-final.llsketch](examples/restaurant-final.llsketch) | Restaurant RPG reference finale (step 8) |
 | [examples/scale-reference.llsketch](examples/scale-reference.llsketch) | Scale convention (`Reference_20m`) |
 
 ## Live demo

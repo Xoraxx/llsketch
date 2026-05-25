@@ -12,8 +12,9 @@ No code required — only chat prompts and sketches.
 |-------|---------------|----------|
 | **A – Quick** | [QUICK-START-AI.md](QUICK-START-AI.md) format legend + example sketch | Untrained models, first contact |
 | **B – Full** | [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md) prompt block + calibration sketch | Spatial-reasoning depth, beta scoring |
+| **C – Restaurant RPG** | [testruns/restaurant-rpg/prompts.md](../testruns/restaurant-rpg/prompts.md) + [restaurant-start.llsketch](../examples/restaurant-start.llsketch) | Long multi-turn simulation (10+ steps) |
 
-Run **Track A** first. Use **Track B** for the full matrix below.
+Run **Track A** first. Use **Track B** for the full matrix below. Use **Track C** for stress-testing memory and layout over a full narrative.
 
 **Format legend** (paste before any sketch):
 
@@ -60,7 +61,24 @@ Reminder if the model drifts: *“Coordinates = your virtual eye for the scene.�
 | **8** | **Copy resilience** | Paste [collapsed sketch](#copy-resilience-test) (one row, spaces OK) | Still parses all 4 objects; extends correctly |
 
 **Minimum pass (public beta):** Track A + tasks **2, 3, 4**.  
-**Full pass:** All tasks including **5, 6, 7, 8**.
+**Full pass:** All tasks including **5, 6, 7, 8**.  
+**Stress pass (optional):** Track C through step 8 — valid LLSketch each turn; terrace + `p` crack; kitchen objects logically placed.
+
+---
+
+## Track C – Restaurant RPG (multi-turn)
+
+See [testruns/restaurant-rpg/](../testruns/restaurant-rpg/) — full protocol, [Gemini reference chat](https://gemini.google.com/share/5f8744929f30).
+
+| Step | Focus |
+|------|--------|
+| 0–1 | Train on spec + start [restaurant-start.llsketch](../examples/restaurant-start.llsketch) |
+| 2–4 | Guest seating, group of 6, car alarm |
+| 5–6 | Terrace opens; payment wave |
+| 7–8 | Meat delivery; **terrace crack** (`p`) + wine apology |
+| 9–10 | Park break; closing tidy-up |
+
+Compare step 8 visually against [restaurant-final.llsketch](../examples/restaurant-final.llsketch) in the [web editor](https://ai-storycrafter.com/llsketch-editor.php).
 
 ---
 
@@ -189,5 +207,6 @@ Found a pass or fail? [Open a GitHub Issue](https://github.com/Xoraxx/llsketch/i
 
 - [QUICK-START-AI.md](QUICK-START-AI.md) — format legend for any chat  
 - [AI-INSTRUCTIONS.md](AI-INSTRUCTIONS.md) — full prompt + calibration  
+- [testruns/restaurant-rpg/](../testruns/restaurant-rpg/) — long multi-turn test (Track C)  
 - [SPECIFICATION.md](SPECIFICATION.md) — normative syntax (v1.2)  
 - [WEB-EDITOR.md](WEB-EDITOR.md) — Canvas/SVG integration for `f` vs `p`
